@@ -25,7 +25,6 @@ function MailHeader() {
         </Wrapper>
   )
 }
-
 export default MailHeader
 
 const Wrapper=styled(Box)({
@@ -45,5 +44,4 @@ const Wrapper=styled(Box)({
             
         }
     }
-
-})
+});

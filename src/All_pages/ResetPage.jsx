@@ -18,7 +18,6 @@ import { API_URLS } from '../service/centralUrl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-
 const defaultTheme = createTheme();
 
 export function Reset() {
@@ -61,19 +60,17 @@ const getReset = useApi(API_URLS.resetPass);
         progress: undefined,
         theme: "colored",
       });
-
      }
     } catch (error) {
         console.log(error);
     }
-   
   };
 
   const handlechange=(e)=>{
     e.preventDefault();
     setReset({...reset,[e.target.name]: e.target.value });
   console.log(reset);
-}
+ }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -85,8 +82,7 @@ const getReset = useApi(API_URLS.resetPass);
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -103,8 +99,7 @@ const getReset = useApi(API_URLS.resetPass);
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={handlechange}
-            />
+              onChange={handlechange} />
                        
             <Button
               type="submit"
@@ -128,7 +123,6 @@ const getReset = useApi(API_URLS.resetPass);
             </Grid>
           </Box>
         </Box>
-        
       </Container>
     </ThemeProvider>
   );

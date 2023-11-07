@@ -21,7 +21,8 @@ const {inbox}=state;
 const token=localStorage.getItem('token');
 
 const getInbox=useApi(API_URLS.getInboxMsg);
-console.log(getInbox,"loop")
+// console.log(getInbox,"loop")
+
 useEffect(()=>{
   const fetchdata=async()=>{
     const res=await getInbox.call({},token);
@@ -30,16 +31,17 @@ useEffect(()=>{
     const data=res.data.message;
    dispatch(setInbox(data));
   }
-  }
+}
  fetchdata();
 },[]);
 
 //function for view individual message
 const handleMailClick=(e)=>{
   console.log(e.target.id);
+  const msgId=e.target.id
      const res=inbox.find(message=>message._id==e.target.id);
      console.log(res);
-    //  navigate(`/inbox/${msgId}`);
+     navigate(`/inbox/${msgId}`);
   }
 
   return (
@@ -61,14 +63,12 @@ const handleMailClick=(e)=>{
           // onClick={() => toggleStarredMail()}
         />
    )}  
-        
          </Icons>
           <Message onClick={handleMailClick} id={message._id}>
           <div>{message.sender_name}</div>
          <div>{message.subject}</div>
          <div>{message.date}</div>
          </Message>
-
         </Row>
     ))}   
 </RowContainer>
@@ -83,7 +83,10 @@ const Row=styled(Box)({
   gridTemplateColumns:'10%  90%',
   width:'100%',
   placeItems:'center',
-  fontSizeAdjust:'from-font'
+  fontSizeAdjust:'from-font',
+  "&:hover":{
+    backgroundColor:'lightyellow'
+   }
 });
 
 const RowContainer=styled('div')({

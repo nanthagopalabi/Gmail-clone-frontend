@@ -10,9 +10,11 @@ import Forget from './All_pages/ForgetPage';
 import { Reset } from './All_pages/ResetPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken } from './components/redux-container/slices/emailSlice';
+import IndividualMail from './All_pages/IndividualMail';
+import SendPage from './All_pages/SendPage';
 
 function App() {
-  const token=localStorage.getItem('token')||null;
+const [token, setToken] = useState(localStorage.getItem('token')||null);
 
 // const logout = () => {
 //   localStorage.removeItem('token');
@@ -26,6 +28,8 @@ function App() {
           <Route exact path='/' element={<SignIn />}/>
           <Route path='/inbox' element={<Inbox/>}>
           </Route>
+          <Route path='/:type/:msgId' element={<IndividualMail/>}></Route>
+          <Route path='/outbox' element={<SendPage/>}/>
           <Route path='/forget' Component={Forget}/>
           <Route path='/reset/:resetToken' Component={Reset}/>
         </Routes>

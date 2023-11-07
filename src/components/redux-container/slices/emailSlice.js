@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import UseApi from "../../../hook/useApi";
-import { API_URLS } from "../../../service/centralUrl";
 
 //creating cartslice
 export const emailSlice=createSlice({
@@ -8,40 +6,28 @@ export const emailSlice=createSlice({
     initialState:{user:{
         token:localStorage.getItem('token')||null,
         email:null
-    },inbox:[],send:[],draft:[],trash:[]},
+    },inbox:[],send:[],draft:[],trash:[],starred:[],important:[]},
     reducers:{
         
-        setToken:(state,action)=>{
-            state.user.token=action.payload;
-            console.log(action.payload);
-            return
-        },
-        getToken:(state)=>{
-         return state.user.token
-        },
-    //     setInbox:(state,action)=>{
-    //     //   state.inbox.push(...action.payload);
-    //     action.payload.forEach(element => {
-    //         state.inbox.every((msg)=>element._id!==msg._id) ? state.inbox.push(element):null 
-           
-    //    });
-    // },
-
-    setInbox: (state, action) => {
-        const emailElements = action.payload;
-      
-        if (Array.isArray(emailElements)) {
-          emailElements.forEach(element => {
-            // Check if the element is already in the inbox by comparing _id
-            if (!state.inbox.some(msg => element._id === msg._id)) {
-              state.inbox.push(element);
-            }
-          });
-        }
+     setToken:(state,action)=>{
+        state.user.token=action.payload;
+        console.log(action.payload);
+        return
       },
-      
-  }
+     getToken:(state)=>{
+        return state.user.token
+      },
+     setInbox:(state,action)=>{
+        action.payload.forEach(element => {
+        state.inbox.every((msg)=>element._id!==msg._id) ? state.inbox.push(element):null
+       });
+     },
+     setSend:(state,action)=>{
+        action.payload.forEach(element => {
+        state.send.every((msg)=>element._id!==msg._id) ? state.send.push(element):null 
+       });
+      }
+   }
 });
-
-export const {setToken,getToken,setInbox}=emailSlice.actions
+export const {setToken,getToken,setInbox,setSend}=emailSlice.actions
 export default emailSlice.reducer;

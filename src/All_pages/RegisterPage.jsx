@@ -36,9 +36,7 @@ function Copyright(props) {
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
-
 
 //valiadation schema
 const validationSchema = yup.object({
@@ -57,23 +55,16 @@ const validationSchema = yup.object({
       .required('Password is required'),
   });
 
-
-
 export default function SignUp() {
 const navigate = useNavigate();
-//  const [user,setUser]=useState({name:'',email:'',password:''});
-
 
 //calling end point from global url
 const createRegister=useApi(API_URLS.createUser);
-
-  const handleSubmit = async() => {   
+const handleSubmit = async() => {   
    try {
     const res = await createRegister.call(formik.values,'');
-    console.log(res, "new")
     console.log("Registration successful");
     if(res.status){
-      console.log( "hello")
       toast.success("Registered Successfully", {
         position: "top-center",
         autoClose: 1500,
@@ -86,7 +77,7 @@ const createRegister=useApi(API_URLS.createUser);
       });
       navigate('/');
       return 
-    }else{
+    }else {
       toast.error("Unable to Register", {
         position: "top-center",
         autoClose: 1500,
@@ -100,7 +91,7 @@ const createRegister=useApi(API_URLS.createUser);
     }
    } catch (error) {
     console.log(error);
-   }
+  }
 };
 
 const formik = useFormik({
@@ -116,8 +107,6 @@ const formik = useFormik({
   },
 });
 
-
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -128,8 +117,7 @@ const formik = useFormik({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -151,11 +139,8 @@ const formik = useFormik({
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                  error={formik.touched.name && Boolean(formik.errors.name)}
-                 helperText={formik.touched.name && formik.errors.name}
-        
-
-                />
-              </Grid>
+                 helperText={formik.touched.name && formik.errors.name}/>
+           </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -168,10 +153,8 @@ const formik = useFormik({
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={formik.touched.name && Boolean(formik.errors.name)}
-                  helperText={formik.touched.name && formik.errors.name}
-
-                />
-              </Grid>
+                  helperText={formik.touched.name && formik.errors.name}/>
+           </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -185,24 +168,19 @@ const formik = useFormik({
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={formik.touched.password && Boolean(formik.errors.password)}
-                  helperText={formik.touched.password && formik.errors.password}
-                />
-              </Grid>
+                  helperText={formik.touched.password && formik.errors.password}/>
+            </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I Accepts terms and conditions."
-                />
+                  label="I Accepts terms and conditions."/>
               </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
+              sx={{ mt: 3, mb: 2 }}>Sign Up </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/" variant="body2">

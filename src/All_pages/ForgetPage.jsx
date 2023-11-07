@@ -17,17 +17,14 @@ import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
 import { toast } from 'react-toastify';
 
-
 const defaultTheme = createTheme();
 
 export default function Forget() {
 
   const [email,setEmail]=useState({email:""});
   const getForget=useApi(API_URLS.forgetPass);
-   
   const handleSubmit = async(event) => {
-    event.preventDefault();
-   
+    event.preventDefault(); 
     try {
     const res=await  getForget.call(email,'')
     event.target.reset();
@@ -53,19 +50,12 @@ export default function Forget() {
         progress: undefined,
         theme: "colored",
       });
-
-
     }
-    
 
   //  console.log("password reset mail sent");
    } catch (error) {
     console.log(error);
-    
    }
-
- 
-  
 };
 
   const handlechange=(e)=>{
@@ -73,8 +63,6 @@ export default function Forget() {
     setEmail({...email,[e.target.name]: e.target.value });
 //   console.log(email);
 }
-  
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -85,8 +73,8 @@ export default function Forget() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}
-        >
+          }}>
+
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -103,19 +91,17 @@ export default function Forget() {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={handlechange}
-            />
-                  <Typography color={'red'}>
-                    Enter Registered Email 
-                    </Typography>     
+              onChange={handlechange} />
+                
+              <Typography color={'red'}>
+                Enter Registered Email 
+              </Typography>     
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Send
-            </Button>
+              sx={{ mt: 3, mb: 2 }}>Send</Button>
+
             <Grid container>
               <Grid item xs>
                 <Link href="/" variant="body2">

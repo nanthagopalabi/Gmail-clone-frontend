@@ -1,10 +1,11 @@
 import { Box, styled } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import Layout from '../Layout'
+import Layout from '../components/MsgBodyPage/Layout';
 import {  useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 
-function SingleMail() {
+
+function IndividualMail() {
     const {messageid,type}=useParams();
     const dispatch=useDispatch();
     const {inbox,draft,send,trash}=useSelector((state)=>state.email);
@@ -16,7 +17,6 @@ function SingleMail() {
     
     
 useEffect(()=>{
-  
   const openMessage=async()=>{
      
     if(type=='inbox'){
@@ -24,13 +24,13 @@ useEffect(()=>{
        setMessage(opened);
   
     }else if(type=='send'){
-
+      opened= await send.find((element)=>element._id ==messageid);
+      setMessage(opened);
     }else if(type=='draft'){
 
     }else if(type=='trash'){
 
     }
-    
     
   }
 openMessage();
@@ -42,37 +42,30 @@ openMessage();
     
 
   return (
-    <Layout>
+  <Layout>
     <MailContainer>
-
-   {message?(
-    <div>
+      {message?(
+      <div>
      
-    <Mailheading>{message?.subject?.toString()}</Mailheading>
-      <MailDetail><span>{message?.sender_name?.toString()}</span><span>{message?.from?.toString()}</span>
-     <span>{message.date}</span>
-     </MailDetail>
-     <p>{message?.content}</p>
-     {message.attachment?<a href={message.attachment} target='_new'>Attachment</a> : "" }
-     
-    <div>
+      <Mailheading>{message?.subject?.toString()}</Mailheading>
+        <MailDetail><div>{message?.sender_name || receiver_name}</div>
+          <div>{message?.from?.toString()}</div>
+          <div>{message.date}</div>
+        </MailDetail>
+      <p>{message?.content}</p>
+      {message.attachment?<a href={message.attachment} target='_new'>Attachment</a> : "" }
+        <div>
 
 
-    </div>
-     </div>
-    
-    ):(<p>no messsage</p>)}
-
-
+        </div>
+      </div>  
+      ):(<p>no messsage</p>)}
 
     </MailContainer>
-    </Layout>
-    
+  </Layout>  
   )
 }
-
-export default SingleMail
-
+export default IndividualMail
 
 const MailContainer=styled(Box)({
     width:'100%',
@@ -81,26 +74,21 @@ const MailContainer=styled(Box)({
     display:'flex',
     flexDirection:'column',
     justifyContent:'flex-start'  
-
-});
-
+  });
 const MailWrapper=styled('div')({
-
-});
+  });
 
 const Mailheading=styled('div')({
-  fontWeight:400,
-  fontSize: '1.375rem',
-  WebkitFontSmoothing:'antialiased',
-  fontFamily:'"Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif',
-  color:'#1f1f1f',
-
-});
+    fontWeight:400,
+    fontSize: '1.375rem',
+    WebkitFontSmoothing:'antialiased',
+    fontFamily:'"Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif',
+    color:'#1f1f1f',
+  });
 
 const MailDetail=styled('div')({
-
-  display:'flex',
-  flexDirection:'row',
-  width:'100%',
-  justifyContent:'space-between'
-})
+    display:'flex',
+    flexDirection:'row',
+    width:'100%',
+    justifyContent:'space-between'
+  });

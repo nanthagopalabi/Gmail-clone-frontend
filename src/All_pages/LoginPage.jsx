@@ -34,7 +34,6 @@ function Copyright(props) {
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function SignIn() {
@@ -44,7 +43,7 @@ export default function SignIn() {
         email:""
         ,password:""});
 
-        //calling end point from global url
+  //calling end point from global url
   const getlogin=useApi(API_URLS.userLogin);
 
   //function to handle login
@@ -58,16 +57,16 @@ export default function SignIn() {
           dispatch(setToken(token));
           localStorage.setItem('token',token);
 
-          // toast.success("Login Successfully", {
-          //   position: "top-center",
-          //   autoClose: 1500,
-          //   hideProgressBar: false,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          //   theme: "colored",
-          // });
+          toast.success("Login Successfully", {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         navigate('/inbox');
         return
       }else{
@@ -81,7 +80,6 @@ export default function SignIn() {
             progress: undefined,
             theme: "colored",
           });
-    
         }
   } catch (error) {
     console.log("error", error);
@@ -104,8 +102,8 @@ export default function SignIn() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}
-        >
+          }}>
+
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -122,8 +120,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={handlechange}
-            />
+              onChange={handlechange}/>
             <TextField
               margin="normal"
               required
@@ -133,20 +130,17 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={handlechange}
-            />
+              onChange={handlechange}/>
+
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+              label="Remember me"/>
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
+              sx={{ mt: 3, mb: 2 }}>Sign In</Button>
             <Grid container>
               <Grid item xs>
                 <Link href="forget" variant="body2">

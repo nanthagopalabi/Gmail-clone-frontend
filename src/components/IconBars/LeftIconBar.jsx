@@ -61,11 +61,9 @@ function LeftIconBar() {
       <SettingsIcon />
       </Button>
       </Wrapper>
-        
     </div>
   )
-}
-
+};
 export default LeftIconBar
 
 const Wrapper=styled(Box)({
@@ -77,11 +75,6 @@ const Wrapper=styled(Box)({
      alignItems:'flex-start',
      rowGap:5,
       
-    //  "& > *":{
-    //   border: 'none',
-    //   outline: 'none',
-      
-    //  },
      "& > *:focus":{
       border: 'none',
       outline: 'none',
@@ -108,4 +101,4 @@ const Compose=styled(Box)({
     border: 'none',
          outline: 'none'
   }
-})
+});
