@@ -11,8 +11,6 @@ import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-
-  
   export const Sidebar_icons = [
     {
       name: "inbox",

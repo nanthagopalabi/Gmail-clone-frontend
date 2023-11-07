@@ -11,18 +11,17 @@ import Button from '@mui/material/Button';
 function MailHeader() {
   return (
     <Wrapper>
-        <ButtonGroup variant="outlained" >
+      <ButtonGroup variant="outlained" >
         <Button >
             <Checkbox/>
         </Button>
-        <Button size="large"  
-        >
-          <ArrowDropDownIcon />
-        </Button>
+         <Button size="large">
+           <ArrowDropDownIcon/>
+         </Button>
       </ButtonGroup>
-        <RefreshIcon />
+        <RefreshIcon/>
         <MoreVertIcon/>
-        </Wrapper>
+    </Wrapper>
   )
 }
 export default MailHeader
@@ -33,7 +32,7 @@ const Wrapper=styled(Box)({
     justifyContent:'center',
     alignItems:'center',
     gap:10,
-    marginLeft:"15%",
+    marginLeft:"1%",
 
     "& > div":{
 
@@ -41,7 +40,6 @@ const Wrapper=styled(Box)({
             width:25,
             paddingRight:0,
             paddingLeft:0
-            
         }
     }
 });

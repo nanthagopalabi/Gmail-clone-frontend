@@ -1,14 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import emailSlice from './slices/emailSlice';
+import emailSlice from './emailSlice';
 import storage from 'redux-persist/lib/storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import {persistStore,persistReducer,
-       FLUSH,REHYDRATE,PAUSE,
-       PERSIST,PURGE,REGISTER} from 'redux-persist';
+    FLUSH,REHYDRATE,PAUSE,
+    PERSIST,PURGE,REGISTER} from 'redux-persist';
 
 const persistConfig = {
     key: 'root',
     version: 1,
     storage,
+    stateReconciler: autoMergeLevel2,
 };
 
 const persistedReducer = persistReducer(persistConfig, emailSlice);

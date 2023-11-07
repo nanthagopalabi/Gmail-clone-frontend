@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import {useState} from 'react'
 import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setToken, getToken } from '../components/redux-container/slices/emailSlice';
 
@@ -57,29 +57,29 @@ export default function SignIn() {
           dispatch(setToken(token));
           localStorage.setItem('token',token);
 
-          toast.success("Login Successfully", {
-            position: "top-center",
-            autoClose: 1500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          // toast.success("Login Successfully", {
+          //   position: "top-center",
+          //   autoClose: 1500,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          //   theme: "colored",
+          // });
         navigate('/inbox');
-        return
+  
       }else{
-        toast.error("Unable to Login", {
-            position: "top-center",
-            autoClose: 1500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+        // toast.error("Unable to Login", {
+        //     position: "top-center",
+        //     autoClose: 1500,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     progress: undefined,
+        //     theme: "colored",
+        //   });
         }
   } catch (error) {
     console.log("error", error);

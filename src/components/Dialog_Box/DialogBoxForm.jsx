@@ -5,13 +5,11 @@ import { Button, ButtonGroup, DialogContent, FormLabel, IconButton, InputBase, P
 import { Field, Form } from 'formik';
 import axios from "axios";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AttachFileIcon from "@mui/icons-material/AttachFile";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { API_URLS } from '../../service/centralUrl';
 
 function MailForm(props) {
-   
     const [file,setFile]=useState(null);
 
     //getting token from local storage

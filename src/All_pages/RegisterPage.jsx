@@ -65,29 +65,29 @@ const handleSubmit = async() => {
     const res = await createRegister.call(formik.values,'');
     console.log("Registration successful");
     if(res.status){
-      toast.success("Registered Successfully", {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      // toast.success("Registered Successfully", {
+      //   position: "top-center",
+      //   autoClose: 1500,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
       navigate('/');
       return 
     }else {
-      toast.error("Unable to Register", {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      // toast.error("Unable to Register", {
+      //   position: "top-center",
+      //   autoClose: 1500,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
     }
    } catch (error) {
     console.log(error);

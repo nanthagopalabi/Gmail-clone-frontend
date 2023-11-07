@@ -4,38 +4,42 @@ import { Box, Button, Container, ListItem } from '@mui/material';
 import {styled} from '@mui/material'
 import { Sidebar_icons } from '../configure/drawerSidebar.js';
 import CustomizedDialogs from '../Dialog_Box/CreateDialogBox';
+import { useNavigate } from 'react-router-dom';
 
 function SideBarIcons() {
-    
+const navigate=useNavigate();    
 const [open, setOpen] = useState(false);
+  
 const handleClickOpen = () => {
   setOpen(true);
  };
- const handleClose = () => {   
+  const handleClose = () => {   
   setOpen(false);
+ };
+  const handleNavigate=(elementname)=>{
+  navigate(`/${elementname}`);
  };
 
 return (
-    <SideIconWrapper>
-       <ComposeWrapper>
+  <SideIconWrapper>
+     <ComposeWrapper>
        <Button  size='large' onClick={ handleClickOpen}  >
         <Compose>
         <CreateIcon/>
           Compose
           <CustomizedDialogs open={open} handleClose={handleClose}  />
         </Compose>
-        </Button>
-        
-       </ComposeWrapper>
-       <FeaturesWrapper>
+      </Button>  
+      </ComposeWrapper>
+
+      <FeaturesWrapper>
         {Sidebar_icons.map((element)=>(
-            <ListItem key={element.name} >
-            <element.icon sx={{paddingRight:3}}>
-            </element.icon>
-            {element.title}
+            <ListItem key={element.name}  onClick={()=>handleNavigate(element.name)} >
+             <element.icon sx={{paddingRight:"1em"}}>
+             </element.icon>
+             {element.title}
             </ListItem>
         ))}
-
        </FeaturesWrapper>
     </SideIconWrapper>
   )
@@ -82,7 +86,8 @@ const FeaturesWrapper=styled(Box)({
     justifyContent:'center',
     flexDirection:'column',
     marginTop:10,
-     
+    color:'black',
+
     '& > *:hover':{
     background:'#bfd6fb',
     borderRadius:'0px 40px 40px 0px',
