@@ -13,6 +13,7 @@ import { getToken } from './components/redux-container/slices/emailSlice';
 import IndividualMail from './All_pages/IndividualMail';
 import DraftPage from './All_pages/DraftPage';
 import SendPage from './All_pages/SendPage';
+import ErrorPage from './All_pages/ErrorPage';
 
 function App() {
 const [token, setToken] = useState(localStorage.getItem('token')||null);
@@ -27,14 +28,13 @@ const [token, setToken] = useState(localStorage.getItem('token')||null);
         <Routes>
           <Route path='/register' Component={SignUp}/>
           <Route exact path='/' element={<SignIn />}/>
-          <Route path='/inbox' element={<Inbox/>}>
-          </Route>
-          <Route path='/:type/:messageid' element={<IndividualMail/>}></Route>
-          <Route path='/:type/:msgId' element={<IndividualMail/>}></Route>
+          <Route path='/inbox' element={<Inbox/>}> </Route>
+          <Route path='/:type/:msgId' element={<IndividualMail/>}> </Route>
           <Route path='/outbox' element={<SendPage/>}/>
           <Route path='/forget' Component={Forget}/>
-          <Route path='/reset/:resetToken' Component={Reset}/>
+          <Route path='/reset/:token' Component={Reset}/>
           <Route path='/draft' Component={DraftPage}/>
+          <Route path='*' Component={ErrorPage}/>
         </Routes>
       </BrowserRouter>
     <ToastContainer/>

@@ -23,7 +23,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
       icon: StarIcon,
     },
     {
-      name: "Sent",
+      name: "outbox",
       title: "Sent",
       icon:  SendIcon,
     },
@@ -33,43 +33,42 @@ import SettingsIcon from '@mui/icons-material/Settings';
       icon: InsertDriveFileIcon,
     },
     {
-      name: "Important",
+      name: "important",
       title: "Important",
       icon: LabelImportantIcon,
     },
     {
-      name: "Trash",
+      name: "trash",
       title: "Trash",
       icon: DeleteIcon,
     },
-  
     {
-      name: "Snoozed",
+      name: "snoozed",
       title: "Snoozed",
       icon: AccessTimeIcon,
     },
     {
-      name: "Chats",
+      name: "chats",
       title: "Chats",
       icon: ChatIcon,
     },
     {
-      name: "Scheduled",
+      name: "scheduled",
       title: "Scheduled",
       icon: ScheduleSendIcon,
     },
     {
-      name: "All Mail",
+      name: "all_Mail",
       title: "All Mail",
       icon: EmailIcon,
     },
     {
-      name: "Spam",
+      name: "spam",
       title: "Spam",
       icon: ReportGmailerrorredIcon,
     },
     {
-      name: "Manage labels",
+      name: "manage_labels",
       title: "Manage labels",
       icon: SettingsIcon,
     },

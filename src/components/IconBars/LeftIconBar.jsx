@@ -21,47 +21,47 @@ function LeftIconBar() {
         <Wrapper>
           <Compose>
             <Box variant='black'>
-      <CreateIcon />
-      </Box>
-      </Compose>
-      <Button variant='black'> 
-      <InboxIcon />
-      </Button>
-      <Button variant='black'>
-      <StarBorderIcon />
-      </Button>
-      <Button variant='black'>
-      <SendIcon />
-      </Button>
-      <Button variant='black'>
-      <InsertDriveFileIcon />
-      </Button>
-      <Button variant='black'>
-      <LabelImportantIcon />
-      </Button>
-      <Button variant='black'>
-      <DeleteOutlineIcon />
-      </Button>
-      <Button variant='black'>
-      <AccessTimeIcon />
-      </Button>
-      <Button variant='black'>
-      <ChatBubbleOutlineIcon />
-      </Button>
-      <Button variant='black'>
-      <ScheduleSendIcon />
-      </Button>
-      <Button variant='black'>
-      <MailOutlineIcon />
-      </Button>
-      <Button variant='black'>
-      <ReportGmailerrorredIcon />
-      </Button>
-      <Button variant='black'>
-      <SettingsIcon />
-      </Button>
+               <CreateIcon />
+            </Box>
+          </Compose>
+            <Button variant='black'> 
+              <InboxIcon />
+            </Button>
+              <Button variant='black'>
+                <StarBorderIcon />
+              </Button>
+                <Button variant='black'>
+                  <SendIcon />
+                </Button>
+                    <Button variant='black'>
+                      <InsertDriveFileIcon />
+                    </Button>
+                       <Button variant='black'>
+                          <LabelImportantIcon />
+                        </Button>
+                          <Button variant='black'>
+                              <DeleteOutlineIcon />
+                          </Button>
+                          <Button variant='black'>
+                            <AccessTimeIcon />
+                          </Button>
+                      <Button variant='black'>
+                         <ChatBubbleOutlineIcon />
+                    </Button>
+                <Button variant='black'>
+                    <ScheduleSendIcon />
+                </Button>
+             <Button variant='black'>
+                <MailOutlineIcon />
+              </Button>
+            <Button variant='black'>
+              <ReportGmailerrorredIcon />
+            </Button>
+        <Button variant='black'>
+          <SettingsIcon />
+        </Button>
       </Wrapper>
-    </div>
+  </div>
   )
 };
 export default LeftIconBar
@@ -99,6 +99,6 @@ const Compose=styled(Box)({
 
   "& >button:focus":{
     border: 'none',
-         outline: 'none'
+    outline: 'none'
   }
 });

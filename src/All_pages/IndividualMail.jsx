@@ -3,52 +3,42 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/MsgBodyPage/Layout';
 import {  useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-
+import { API_URLS } from '../service/centralUrl';
 
 function IndividualMail() {
-    const {messageid,type}=useParams();
+    const {msgId,type}=useParams();
     const dispatch=useDispatch();
-    const {inbox,draft,send,trash}=useSelector((state)=>state.email);
-    // const send=useSelector((state)=>state.email.send);
-    // const draft=useSelector((state)=>state.email.draft);
-    // const trash=useSelector((state)=>state.email.inbox);
-   
+    const {inbox,draft,send,trash,}=useSelector((state)=>state.email);
+ 
     const [message,setMessage]=useState(null);
-    
     
 useEffect(()=>{
   const openMessage=async()=>{
+    let opened;
      
     if(type=='inbox'){
-       let opened =await inbox.find((element)=>element._id ==messageid)
+       opened =await inbox.find((element)=>element._id ==msgId)
        setMessage(opened);
   
-    }else if(type=='send'){
-      opened= await send.find((element)=>element._id ==messageid);
+    }else if(type=='outbox'){
+      opened= await send.find((element)=>element._id ==msgId);
       setMessage(opened);
-    }else if(type=='draft'){
+    }else if(type=='draftMsg'){
 
-    }else if(type=='trash'){
+    }else if(type=='trashMsg'){
 
     }
-    
   }
-openMessage();
- 
-  
+  openMessage();
 },[message])
 
-  
-    
-
-  return (
+return (
   <Layout>
     <MailContainer>
       {message?(
-      <div>
-     
+      <div>   
       <Mailheading>{message?.subject?.toString()}</Mailheading>
-        <MailDetail><div>{message?.sender_name || receiver_name}</div>
+        <MailDetail><div>{message?.sender_name || message.receiver_name}</div>
           <div>{message?.from?.toString()}</div>
           <div>{message.date}</div>
         </MailDetail>
@@ -56,11 +46,9 @@ openMessage();
       {message.attachment?<a href={message.attachment} target='_new'>Attachment</a> : "" }
         <div>
 
-
         </div>
       </div>  
       ):(<p>no messsage</p>)}
-
     </MailContainer>
   </Layout>  
   )

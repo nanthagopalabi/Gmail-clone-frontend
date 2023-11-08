@@ -9,10 +9,12 @@ import {Container} from '@mui/material';
 import { ListItemButton } from '@mui/material';
 import LeftIconBar from '../IconBars/LeftIconBar';
 import Inbox from '../Inbox';
+import InboxIcon from '@mui/icons-material/Inbox';
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import MailHeader from './MsgTopHeader';
 import RightSideIcon from '../IconBars/RightIconBar';
-
-
 
 function Layout({children}) {
   const [openDrawer, setOpenDrawer] = useState(true);
@@ -23,39 +25,44 @@ function Layout({children}) {
   return (
     <>
      <LayoutWrapper style={{position:'fixed', width:'100%'}}>
-      <Header toggleDrawer={toggleDrawer} />
-        
+      <Header toggleDrawer={toggleDrawer} />   
       <Main>
       <LeftIconBarWrapper>
         {/* <LeftIconBar/> */}
         <Sidebar openDrawer={openDrawer}/>
       </LeftIconBarWrapper>
-      <MainBodyWrapper style={openDrawer?{marginLeft:250,paddingLeft:0}:{width:"100%"}}  >
+      <MainBodyWrapper style={openDrawer?{marginLeft:250,paddingLeft:0}:{width:"100%"}} >
         <EmailTopBar>
          <MailHeader/>
          
-        </EmailTopBar>
+         </EmailTopBar>
         <TabBar>
           <TabBarItems>
-          <p>primary</p>
-          <p>promotion </p>
-          <p>social</p>
-          <p>updates</p>
-          </TabBarItems>
-        </TabBar>
-      <MailContainer>
-      {/* <Box sx={{display:'flex', width:'98%'}}> */}
-        {children}
-      </MailContainer>
-          
-      </MainBodyWrapper>
-      <RigthSideIconBar>
-        <RightSideIcon/>
+            <div>
+              <div><InboxIcon/></div>Primary
+            </div>  
+              <div>
+                <div><LocalOfferOutlinedIcon/></div>
+                  Promotion
+                </div>
+                  <div>
+                   <div><GroupOutlinedIcon/></div>
+                      Social</div>
+                        <div>
+                         <div><InfoOutlinedIcon/></div>
+                          Updates</div>
+                         </TabBarItems>
+                         </TabBar>
+                      <MailContainer >
+                    {children}
+                  </MailContainer>
+                </MainBodyWrapper>
+            <RigthSideIconBar>
+         <RightSideIcon/>
       </RigthSideIconBar>
-      </Main>
-      
-    </LayoutWrapper>  
-  </>
+    </Main>
+  </LayoutWrapper>  
+</>
   )
 }
 export default Layout
@@ -98,14 +105,27 @@ const LayoutWrapper=styled(Box)({
     display:'flex',
     width:'100%',
     height:50,
-    background:'grey'
+    // background:'grey'
    });
   const TabBarItems=styled('div')({
-    display:'flex',
-    flexDirection:'row',
+    display:'grid',
+    gridTemplateColumns:'25% 25% 25% 25%',
     width:'100%',
-    justifyContent:'space-between'
-   });
+    justifyContent:'space-between',
+    alignItems:'center',  
+   
+  "& >*":{
+    display:'flex',
+    padding:" 10px 0 10px 0",
+    gap:'10px',
+   },
+  
+   "&>*:hover":{
+    backgroundColor:'#f5f5f5',
+    borderBottom:'3px solid blue'
+   }
+ });
+
   const MailContainer=styled(Box)({
     display: 'flex', 
     flexDirection:'column', 

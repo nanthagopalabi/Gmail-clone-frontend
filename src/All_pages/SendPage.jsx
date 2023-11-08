@@ -16,37 +16,36 @@ function SendPage() {
    
 const state=useSelector((state)=>state.email);
 const {send}=state;
-const token=useSelector((state)=>state.email.user.token);
+const token=localStorage.getItem('token');
 const dispatch=useDispatch();
 const navigate=useNavigate();
 
 const getSendMail=useApi(API_URLS.getOutboxMsg);
-const toggler=useApi(API_URLS.toggleStarredEmail);
+const toggler=useApi(API_URLS.markStarredMsg);
 const mailDelete=useApi(API_URLS.deleteMsg);
 
   const fetchdata=async()=>{  
     try{
     const res=await getSendMail.call({},token);
       if(res.status){
-      const data=res.data.SendEmail;
+      const data=res.data.message;
       dispatch(setSend(data));
      }
    }catch (error){
     console.log(error);
    }
  }
-  useEffect(()=>{
+ useEffect(()=>{
   fetchdata();
   },[]);
 
 const handleClick=(event)=>{
 let msgId=event.target.id;
-
     if(msgId){
-       navigate(`/send/${msgId}`)
+       navigate(`/outbox/${msgId}`)
     }else{
     msgId=event.target.parentElement.id
-    navigate(`/send/${msgId}`);
+    navigate(`/outbox/${msgId}`);
   }
 }
 
@@ -64,14 +63,15 @@ const toggleStarredMail=async()=>{
 const handleDelete=async(event)=>{
   try {
     let msgId=event.target.closest('.row').children[1].id;
-    const params=messageid;
+    const params=msgId;
     dispatch(setDelete(msgId));
     const res= await mailDelete.call({},token,params);
       if(res.status){
        const update=await getSendMail.call({},token);
       if(update.status){
-       const data = update.data.SendEmail;
+       const data = update.data.message;
         dispatch(setSend(data));
+        console.log(data)
        }
      } 
    } catch (error) {
@@ -79,8 +79,8 @@ const handleDelete=async(event)=>{
     } 
   }
 return (
-    <Layout>
-       <MailContainer>
+  <Layout>
+     <MailContainer>
        {send?.map((msg)=>(
         <Row key={msg._id} className='row' onClick={handleClick}>
          <Icons>
@@ -96,17 +96,17 @@ return (
 
          </IconButton>
          ) : (
-        <IconButton>
+        <IconButton  onClick={toggleStarredMail}>
         <StarBorder
           fontSize="small"
           style={{ }}
-          onClick={toggleStarredMail} />
+          />
         </IconButton>
      )}  
       {msg.important?(
-    <IconButton >
-     <LabelImportantIcon
-     style={{  color: "#FADA5E" }} />
+     <IconButton >
+      <LabelImportantIcon
+      style={{  color: "#FADA5E" }} />
    </IconButton>   
     ):(
    <IconButton>
@@ -114,17 +114,15 @@ return (
     style={{}}/>
    </IconButton>
    )
-   }
-     </Icons>
-      <Message  id={msg._id}  >
-        <div >{msg.sender_name||msg.reciver_name}</div>
+  }
+   </Icons>
+      <Message onClick={handleClick} id={msg._id}  >
+        <div >{msg.sender_name||msg.receiver_name}</div>
         <div>{msg.subject}</div>
-        <div>{msg.date}</div>
-        <div >
+        <div>{msg.date.slice(0,10)}</div>
           <IconButton onClick={handleDelete} className='delete'>
            <DeleteIcon/>
           </IconButton>
-        </div>
        </Message>
       </Row>         
      ))}
@@ -144,11 +142,10 @@ const MailContainer=styled(Box)({
 
 const Row=styled(Box)({
    display:'grid',
-   // gridTemplateColumns:'10% 10% auto 5%',
    gridTemplateColumns:'15%  auto',
    width:'100%',
    placeItems:'center',
-   border:'1px solid blue',
+   borderBottom:'1px solid gray',
    fontSizeAdjust:'from-font',  
    "&:hover":{
    backgroundColor:'lightyellow'
@@ -156,10 +153,14 @@ const Row=styled(Box)({
 });
 
 const Message=styled('div')({
-   display:'flex',
-   flexDirection:'row',
+   display:'grid',
+   gridTemplateColumns:'10% 30% 10% 5%',
    width:'100%',
    justifyContent:'space-between',
+   alignItems:'center',
+   "&:hover":{
+    display:'flex',
+   } 
  });
 
 const Icons=styled('div')({

@@ -5,7 +5,7 @@ const useApi = (urlObject) => {
 const [response, setResponse] = useState(null);
 const [error, setError] = useState("");
 const [isLoading, setIsLoading] = useState(false);
-// const [token, setToken] = useState(localStorage.getItem('token') || '');
+const [token, setToken] = useState(localStorage.getItem('token') || '');
 
 const call = async (payload,token,params) => {
   setResponse(null);

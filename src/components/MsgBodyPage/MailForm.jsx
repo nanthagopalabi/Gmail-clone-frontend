@@ -58,7 +58,7 @@ const mail_send=useApi(API_URLS.composeNew);
   const handleChange=(e)=>{
   setMail({...mail,[e.target.name]:e.target.value});
   console.log(mail);
-  props.setdatafromChild({...mail});
+  // props.setdatafromChild({...mail});
   }
 
   //function to send mail
