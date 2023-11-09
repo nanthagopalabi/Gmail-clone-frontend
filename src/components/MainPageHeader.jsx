@@ -24,16 +24,16 @@ return (
         <IconsWrapper>
           <Icon>
             <IconButton>
-             <HelpOutlineOutlined color="action"/>
+             <HelpOutlineOutlined/>
             </IconButton>
             <IconButton>
-              <SettingsOutlined color="action"/>
+              <SettingsOutlined />
             </IconButton>
             <IconButton>
-              <AppsOutlined color="action"/>
+              <AppsOutlined />
             </IconButton>
             <IconButton>
-              <AccountCircleOutlined color="action"/>
+              <AccountCircleOutlined/>
             </IconButton>
           </Icon>
         </IconsWrapper>  
@@ -46,23 +46,20 @@ export default Header;
 const StyledAppBar = styled(AppBar)({
   background: "#f5f5f5",
   boxShadow: "none",
-  height:'64px !important'
-  // width: "100vw ",
+  height:'64px !important',
 });
 
 const StyledToolbar=styled(Toolbar)({
-    // width:"100%",
-    background: "#f5f5f5",
-    display:"grid",
-    gridTemplateColumns:"15% auto 20%"
-})
+  background: "#f5f5f5",
+  display:"grid",
+  gridTemplateColumns:"15% auto 20%"
+});
 
 const SearchRapper = styled(Box)({
   background: "#EAF1FB",
   marginLeft: 20,
   borderRadius: 8,
   marginRight:8,
-  // width:'100% !important',
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -75,19 +72,18 @@ const SearchRapper = styled(Box)({
 
 const IconsWrapper = styled(Box)({
   display: "grid",
-  // justifyContent: "center",
   width:"70%",
   gridTemplateRows:"repeat(4,30)",
-  background: "#f5f5f5",
-  marginLeft:'30%',
-  // gap:20,
+  backgroundColor: "#f5f5f5",
+  marginLeft:'20%',
   " & > div":{
   }
 });
 
 const LogoWrapper=styled(Box)({
   display:'flex',
-  alignItems:'center'
+  alignItems:'center',
+  background: "#f5f5f5",
 });
 
 const Icon=styled(Box)({

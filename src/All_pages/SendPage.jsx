@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import LabelImportantOutlinedIcon from '@mui/icons-material/LabelImportantOutlined';
 import { useNavigate } from 'react-router-dom';
-import { setDelete } from '../components/redux-container/slices/emailSlice';
+import { setDelete, setStartoggler } from '../components/redux-container/slices/emailSlice';
 
 function SendPage() {
    
@@ -23,6 +23,7 @@ const navigate=useNavigate();
 const getSendMail=useApi(API_URLS.getOutboxMsg);
 const toggler=useApi(API_URLS.markStarredMsg);
 const mailDelete=useApi(API_URLS.deleteMsg);
+const ImportantLabel=useApi(API_URLS.markImportantMsg);
 
   const fetchdata=async()=>{  
     try{
@@ -49,13 +50,17 @@ let msgId=event.target.id;
   }
 }
 
-const toggleStarredMail=async()=>{
+const toggleStarredMail=async(e)=>{
   try {
-    const params='653e82ba81a6bb3977f4a943'
+    const msgId=e.target.closest('.row').children[1].id;
+    console.log(msgId);
+    const params=msgId  
     console.log(token,"jwt");
+    dispatch(setStartoggler(params));
+    console.log(...send);
     let res=await toggler.call({},token,params);
     console.log(res);  
-  } catch (error) {
+    } catch (error) {
     console.log(error); 
   }
 }
@@ -78,6 +83,22 @@ const handleDelete=async(event)=>{
      console.log(error);
     } 
   }
+
+  const toggleImportantMail=async(e)=>{
+    try {
+      const msgId=e.target.closest('.row').children[1].id;
+    console.log(msgId);
+    const params=msgId  
+      console.log(token,"jwt");
+      dispatch(setImportanttoggler(params));
+      console.log(...send);
+      let res=await ImportantLabel.call({},token,params);
+      console.log(res);
+      } catch (error) {
+        console.log(error);     
+    }  
+  }
+  
 return (
   <Layout>
      <MailContainer>
@@ -97,32 +118,30 @@ return (
          </IconButton>
          ) : (
         <IconButton  onClick={toggleStarredMail}>
-        <StarBorder
-          fontSize="small"
-          style={{ }}
-          />
+        <StarBorder fontSize="small"/>
         </IconButton>
      )}  
       {msg.important?(
-     <IconButton >
+     <IconButton onClick={toggleImportantMail}>
       <LabelImportantIcon
       style={{  color: "#FADA5E" }} />
    </IconButton>   
     ):(
-   <IconButton>
-    <LabelImportantOutlinedIcon
-    style={{}}/>
+   <IconButton onClick={toggleImportantMail}>
+    <LabelImportantOutlinedIcon/>
    </IconButton>
    )
   }
    </Icons>
-      <Message onClick={handleClick} id={msg._id}  >
+      <Message id={msg._id} >
         <div >{msg.sender_name||msg.receiver_name}</div>
         <div>{msg.subject}</div>
         <div>{msg.date.slice(0,10)}</div>
+        <div>
           <IconButton onClick={handleDelete} className='delete'>
            <DeleteIcon/>
           </IconButton>
+          </div>
        </Message>
       </Row>         
      ))}
@@ -156,14 +175,15 @@ const Message=styled('div')({
    display:'grid',
    gridTemplateColumns:'10% 30% 10% 5%',
    width:'100%',
-   justifyContent:'space-between',
+   justifyContent:'space-evenly',
    alignItems:'center',
-   "&:hover":{
-    display:'flex',
-   } 
+  //  "&:hover":{
+  //   display:'flex',
+  //  } 
  });
 
 const Icons=styled('div')({
    display:'flex',
+   flexShrink:'1',
    alignItems:'center'
 });

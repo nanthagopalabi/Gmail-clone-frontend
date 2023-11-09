@@ -3,12 +3,11 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/MsgBodyPage/Layout';
 import {  useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { API_URLS } from '../service/centralUrl';
 
 function IndividualMail() {
     const {msgId,type}=useParams();
     const dispatch=useDispatch();
-    const {inbox,draft,send,trash,}=useSelector((state)=>state.email);
+    const {inbox,send,trash,starred,important}=useSelector((state)=>state.email);
  
     const [message,setMessage]=useState(null);
     
@@ -19,14 +18,12 @@ useEffect(()=>{
     if(type=='inbox'){
        opened =await inbox.find((element)=>element._id ==msgId)
        setMessage(opened);
-  
     }else if(type=='outbox'){
       opened= await send.find((element)=>element._id ==msgId);
       setMessage(opened);
-    }else if(type=='draftMsg'){
-
-    }else if(type=='trashMsg'){
-
+    }else if(type=='starred'){
+      opened= await starred.find((element)=>element._id ==messageid);
+      setMessage(opened);
     }
   }
   openMessage();
@@ -38,9 +35,9 @@ return (
       {message?(
       <div>   
       <Mailheading>{message?.subject?.toString()}</Mailheading>
-        <MailDetail><div>{message?.sender_name || message.receiver_name}</div>
-          <div>{message?.from?.toString()}</div>
-          <div>{message.date}</div>
+        <MailDetail><h4>{message?.sender_name || message.receiver_name}</h4>
+          <h5>{message?.from?.toString()}</h5>
+          <p>{message.date}</p>
         </MailDetail>
       <p>{message?.content}</p>
       {message.attachment?<a href={message.attachment} target='_new'>Attachment</a> : "" }

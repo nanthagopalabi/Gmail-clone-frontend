@@ -12,6 +12,7 @@ import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
 import { setDraft } from '../components/redux-container/slices/emailSlice';
 import CustomizedDialogs from '../components/Dialog_Box/CreateDialogBox';
+import { setStartoggler,setImportanttoggler } from '../components/redux-container/slices/emailSlice'; 
 
 function DraftPage() {
     const state=useSelector((state)=>state.email);
@@ -23,6 +24,7 @@ function DraftPage() {
     const getDraftMail=useApi(API_URLS.getDraftMsg);
     const toggler=useApi(API_URLS.markStarredMsg);
     const mailDelete=useApi(API_URLS.deleteMsg);
+    const ImportantLable=useApi(API_URLS.markImportantMsg);
 
     const [open,setOpen]=useState(false);
     const [value,setValue]=useState({
@@ -51,29 +53,60 @@ function DraftPage() {
    } 
 
   const handleClick=(event)=>{
-  setOpen(true);
   let msgId=event.target.id;
     if(msgId){
-     setMsgId(msgId);
-     const editedmail=draft.find((msg)=>msg._id==msgId);
-     setValue({...value,to:editedmail.to,subject:editedmail.subject
+      setOpen(true);
+      setMsgId(msgId);
+      const editedmail=draft.find((msg)=>msg._id==msgId);
+      setValue({...value,to:editedmail.to,subject:editedmail.subject
         ,content:editedmail.content
     });
     }else{
      msgId=event.target.parentElement.id
+     setOpen(true);
+     setMsgId(msgId);
+    const editedmail=draft.find((msg)=>msg._id==msgId);
+    setValue({...value,to:editedmail?.to,subject:editedmail?.subject
+ ,content:editedmail?.content
+ });
     }
   }
 
-  const toggleStarredMail=async()=>{
+  const toggleStarredMail=async(e)=>{
+    e.stopPropagation()
+
+try {
+  const msgId=e.target.closest('.row').children[1].id;
+  console.log(msgId);
+  const params=msgId  
+    console.log(token,"jwt");
+    dispatch(setStartoggler(params));
+   
+    let res=await toggler.call({},token,params);
+    console.log(res);
+  
+} catch (error) {
+ console.log(error);     
+}
+}
+
+//function for important label
+const toggleImportantMail=async(event)=>{
+  event.stopPropagation();
+ 
   try {
-   const params='653e82ba81a6bb3977f4a943'
-   console.log(token,"jwt");
-   let res=await toggler.call({},token,params);
-   console.log(res);
-    } catch (error) {
-    console.log(error);     
-    }
+    const msgId=event.target.closest('.row').children[1].id;
+  console.log(msgId);
+  const params=msgId  ;
+   
+    dispatch(setImportanttoggler(params));
+    let res=await ImportantLable.call({},token,params);
+    console.log(res);
+    
+  } catch (error) {
+   console.log(error);     
   }
+}
 
   const handleDelete=async(event)=>{
     try {
@@ -135,9 +168,9 @@ return (
                  style={{color: "#FADA5E"}}/>
                </IconButton>
                    ):(
-                <IconButton>
-                  <LabelImportantOutlinedIcon
-                     style={{}}/></IconButton>
+                <IconButton onClick={toggleImportantMail}>
+                  <LabelImportantOutlinedIcon/>
+                  </IconButton>
                 )
               }
             </Icons>
@@ -175,7 +208,7 @@ export default DraftPage
     gridTemplateColumns:'15%  auto',
     width:'100%',
     placeItems:'center',
-    border:'1px solid blue',
+    borderBottom:'1px solid gray',
     fontSizeAdjust:'from-font',  
     "&:hover":{
     backgroundColor:'lightyellow'
@@ -183,10 +216,11 @@ export default DraftPage
   });
   
   const Message=styled('div')({
-    display:'flex',
-    flexDirection:'row',
+    display:'grid',
+    gridTemplateColumns:'10% 30%  10% 5%',
     width:'100%',
-    justifyContent:'space-between',  
+    justifyContent:'space-between',
+    alignItems:'center' 
    });
   
   const Icons=styled('div')({

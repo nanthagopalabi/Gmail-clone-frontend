@@ -25,6 +25,75 @@ const {inbox}=state;
 const token=localStorage.getItem('token');
 const mailDelete=useApi(API_URLS.deleteMsg);
 const getInbox=useApi(API_URLS.getInboxMsg);
+const toggler=useApi(API_URLS.markStarredMsg);
+const ImportantLabel=useApi(API_URLS.markImportantMsg);
+
+//function to open single mail
+const handleMailClick=(e)=>{
+  let msgId=e.target.id;
+
+  if(msgId){
+     navigate(`/inbox/${msgId}`)
+  }else{
+    msgId=e.target.parentElement.id
+   navigate(`/inbox/${msgId}`);
+  }
+}
+
+//function to handle delete
+const handleDelete=async(e)=>{
+  try {
+    let msgId=e.target.closest('.row').children[1].id;
+  const params=msgId;
+  console.log(params);
+  dispatch(setDelete(msgId));
+   const res= await mailDelete.call({},token,params);
+   console.log(res);
+  if(res.status){
+     const update=await getInbox.call({},token);
+     if(update.status){
+      const data = update.data.InboxMail;
+          dispatch(setInbox(data));
+     }
+  }
+  } catch (error) {
+   console.log(error);
+  }
+  }
+
+  //function star toggling
+const toggleStarredMail=async(e)=>{
+  
+  try {
+    const msgId=e.target.closest('.row').children[1].id;
+console.log(msgId);
+const params=msgId  
+  console.log(token,"jwt");
+  dispatch(setStartoggler(params));
+ 
+  let res=await toggler.call({},token,params);
+  console.log(res);
+  } catch (error) {
+   console.log(error);     
+  }
+  }
+
+  //function for important label
+  const toggleImportantMail=async(e)=>{
+    try {
+      const msgId=e.target.closest('.row').children[1].id;
+    console.log(msgId);
+    const params=msgId  
+      // console.log(token,"jwt");
+      dispatch(setImportanttoggler(params));
+      // console.log(...send);
+      let res=await ImportantLabel.call({},token,params);
+      console.log(res);
+      
+    } catch (error) {
+     console.log(error);     
+    }
+  }
 
 useEffect(()=>{
   const fetchdata=async()=>{
@@ -38,37 +107,6 @@ useEffect(()=>{
  fetchdata();
 },[]);
 
-//function for view individual message
-const handleMailClick=(event)=>{
-  let msgId=event.target.id
-  if(msgId){
-    navigate(`/inbox/${msgId}`);
-  }else{
-     msgId=event.target.parentElement.id
-     navigate(`/inbox/${msgId}`);
-  }
-}
-
- //function to handle delete
-const handleDelete=async(event)=>{
-  try {
-    let msgId=event.target.closest('.row').children[1].id;
-    const params=msgId;
-    console.log(params);
-    dispatch(setDelete(msgId));
-    const res= await mailDelete.call({},token,params);
-    console.log(res);
-     if(res.status){
-       const update=await getInbox.call({},token);
-     if(update.status){
-       const data = update.data.message;
-       dispatch(setInbox(data));
-      }
-     }
-    } catch (error) {
-      console.log(error);
-    }    
-  }
 return (
   <Layout>
     <RowContainer>
@@ -92,18 +130,18 @@ return (
           </IconButton>
         )}  
           {msg.important?(
-        <IconButton >
+        <IconButton onClick={toggleImportantMail} >
           <LabelImportantIcon
             style={{  color: "#FADA5E" }} />
         </IconButton>
        ):(
-        <IconButton>
+        <IconButton onClick={toggleImportantMail}>
           <LabelImportantOutlinedIcon/>
         </IconButton>
       )
     }  
   </Icons>
-    <Message onClick={handleMailClick} id={msg._id}>
+    <Message id={msg._id}>
         <div>{msg.sender_name}</div>
         <div>{msg.subject}</div>
         <div>{msg.date.slice(0,10)}</div>
@@ -122,23 +160,26 @@ export default Inbox
 const Row=styled(Box)({
   display:'grid',
   // gridTemplateColumns:'10% 10% auto 5%',
-  gridTemplateColumns:'15%  auto',
+  gridTemplateColumns:'15%  85%',
   width:'100%',
   placeItems:'center',
-  fontSizeAdjust:'from-font',
+
   "&:hover":{
-    backgroundColor:'lightyellow'
+    // backgroundColor:'lightyellow'
    }
 });
 
 const RowContainer=styled('div')({
   width:"100%",
-  marginRight:50
+  marginRight:50,
+  display:'flex',
+  flexDirection:'column',
 });
 
 const Icons=styled('div')({
   display:'flex',
-  alignItems:'center'
+  alignItems:'center',
+  flexWrap:'nowrap',
 });
 
 const Message=styled('div')({

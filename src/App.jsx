@@ -13,6 +13,7 @@ import { getToken } from './components/redux-container/slices/emailSlice';
 import IndividualMail from './All_pages/IndividualMail';
 import DraftPage from './All_pages/DraftPage';
 import SendPage from './All_pages/SendPage';
+import Important from './All_pages/ImportantPage';
 import ErrorPage from './All_pages/ErrorPage';
 
 function App() {
@@ -34,6 +35,8 @@ const [token, setToken] = useState(localStorage.getItem('token')||null);
           <Route path='/forget' Component={Forget}/>
           <Route path='/reset/:token' Component={Reset}/>
           <Route path='/draft' Component={DraftPage}/>
+          {/* <Route  path='/starred' Component={Starred} /> */}
+          <Route  path='/important' Component={Important} />
           <Route path='*' Component={ErrorPage}/>
         </Routes>
       </BrowserRouter>

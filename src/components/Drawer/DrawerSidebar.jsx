@@ -50,6 +50,7 @@ const SideIconWrapper=styled(Container)({
     display:'flex',
     flexDirection:'column',
     paddingLeft:'0 !important',
+    backgroundColor:"#f2f5fa"
 });
 const ComposeWrapper=styled(Box)({
     display:'flex',

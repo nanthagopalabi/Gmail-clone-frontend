@@ -35,11 +35,10 @@ const Wrapper=styled(Box)({
     marginLeft:"1%",
 
     "& > div":{
-
         "& > button":{
-            width:25,
-            paddingRight:0,
-            paddingLeft:0
-        }
+          width:25,
+          paddingRight:0,
+          paddingLeft:0
+      }
     }
 });
