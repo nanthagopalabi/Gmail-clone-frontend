@@ -3,14 +3,13 @@ import Layout from '../components/MsgBodyPage/Layout';
 import { Box, Checkbox, IconButton, styled } from '@mui/material';
 import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
-import { setSend } from '../components/redux-container/slices/emailSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Star, StarBorder } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import LabelImportantOutlinedIcon from '@mui/icons-material/LabelImportantOutlined';
 import { useNavigate } from 'react-router-dom';
-import { setDelete, setStartoggler } from '../components/redux-container/slices/emailSlice';
+import { setSend,setDelete, setStartoggler, setImportanttoggler } from '../components/redux-container/slices/emailSlice';
 
 function SendPage() {
    
@@ -29,6 +28,7 @@ const ImportantLabel=useApi(API_URLS.markImportantMsg);
     try{
     const res=await getSendMail.call({},token);
       if(res.status){
+        console.log(res)
       const data=res.data.message;
       dispatch(setSend(data));
      }
@@ -54,7 +54,7 @@ const toggleStarredMail=async(e)=>{
   try {
     const msgId=e.target.closest('.row').children[1].id;
     console.log(msgId);
-    const params=msgId  
+    const params=msgId
     console.log(token,"jwt");
     dispatch(setStartoggler(params));
     console.log(...send);
@@ -67,14 +67,20 @@ const toggleStarredMail=async(e)=>{
 
 const handleDelete=async(event)=>{
   try {
+  
     let msgId=event.target.closest('.row').children[1].id;
     const params=msgId;
+
     dispatch(setDelete(msgId));
+    console.log(params)
     const res= await mailDelete.call({},token,params);
+    console.log(res);
       if(res.status){
        const update=await getSendMail.call({},token);
       if(update.status){
        const data = update.data.message;
+       console.log(data);
+
         dispatch(setSend(data));
         console.log(data)
        }

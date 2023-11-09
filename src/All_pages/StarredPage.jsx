@@ -9,9 +9,9 @@ import { API_URLS } from '../service/centralUrl';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setStarred,setImportant } from '../components/redux-container/slices/emailSlice';
+import { setStarred,setDelete,setImportanttoggler,setStartoggler} from '../components/redux-container/slices/emailSlice';
 
-function Starred() {
+function StarredPage() {
 
 const state=useSelector((state)=>state.email);
 const {starred}=state;
@@ -36,24 +36,13 @@ if(msgId){
 }
 }
 
-//
-const toggleStarredMail=async()=>{
-try {
-  console.log(token,"jwt");
-  let res=await toggler.call({},token,params);
-  console.log(res);
-  } catch (error) {
- console.log(error);     
-}
-}
-//
+//functionality for delete
 const handleDelete=async(event)=>{
   event.stopPropagation();
-  event.preventDefault();
 try {
   let msgId=event.target.closest('.row').children[1].id;
-const params=msgId;
-console.log(params);
+  const params=msgId;
+  console.log(params);
 
  const res= await mailDelete.call({},token,params);
  dispatch(setDelete(msgId));
@@ -61,23 +50,21 @@ console.log(params);
 if(res.status){
    const update=await getStarredMail.call({},token);
    if(update.status){
-    const data = update.data.filteredStarredEmails[0]?.starredEmails;
+    const data = update.data.filteredStarredMsg[0]?.checkMsg;
     dispatch(setStarred(data))
    }
 }
 } catch (error) { 
   console.log(error);
 }
-  
 }
 const fetchdata=async()=>{  
   try {
     const res=await getStarredMail.call({},token);
-    console.log(res);;
   if(res.status){
-    const data=res.data.filteredStarredEmails[0]?.starredEmails
-  console.log(data);
-  dispatch(setStarred(data));
+    const data=res.data.filteredStarredMsg[0]?.checkMsg
+    console.log(data);
+    dispatch(setStarred(data));
   }
   } catch (error) {
     console.log(error);
@@ -88,6 +75,40 @@ useEffect(()=>{
 fetchdata();
 },[]);
 
+//functionality for Mark important
+const toggleImportantMail=async(e)=>{
+  try {
+    const msgId=e.target.closest('.row').children[1].id;
+  console.log(msgId);
+  const params=msgId  
+   
+    dispatch(setImportanttoggler(params));
+    
+    let res=await ImportantLabel.call({},token,params);
+    fetchdata();
+    console.log(res);
+    
+  } catch (error) {
+   console.log(error);     
+  }
+}
+
+//functionality for mark starred
+const toggleStarredMail=async(e)=>{
+  try {
+    const msgId=e.target.closest('.row').children[1].id;
+    console.log(msgId);
+    const params=msgId  
+    console.log(token,"jwt");
+    dispatch(setStartoggler(params));
+    let res=await toggler.call({},token,params);
+    fetchdata();
+    console.log(res);
+    
+  } catch (error) {
+   console.log(error);     
+  }
+  }
 return (
     <Layout>
       <MailContainer>
@@ -117,7 +138,7 @@ return (
     style={{  color: "#FADA5E" }}/>
    </IconButton>
    ):(
-    <IconButton>
+    <IconButton onClick={toggleImportantMail}>
     <LabelImportantOutlinedIcon/>
     </IconButton>
    )
@@ -135,15 +156,13 @@ return (
          </Message>
       </Row>         
    ))}
-      
    </MailContainer>
 </Layout>
   )
 }
-export default Starred
+export default StarredPage
 
 const MailContainer=styled(Box)({
-  // width:'100%',
   height:'100%',
   display:'flex',
   flexDirection:'column',
@@ -166,7 +185,7 @@ const Message=styled('div')({
   display:'grid',
   gridTemplateColumns:'10% 30%  10% 5%',
   width:'100%',
-  justifyContent:'space-between',
+  justifyContent:'space-evenly',
   alignItems:'center',
    "& > *":{
    display:'flex', 

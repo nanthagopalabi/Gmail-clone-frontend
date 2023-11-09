@@ -16,8 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import {useState} from 'react'
 import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
-import { useDispatch, useSelector } from 'react-redux';
-import { setToken, getToken } from '../components/redux-container/slices/emailSlice';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../components/redux-container/slices/emailSlice';
 
 function Copyright(props) {
   return (

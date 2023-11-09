@@ -12,7 +12,6 @@ function MailForm(props) {
 
 //getting token from local storage
 const token=localStorage.getItem('token');
-
     const [mail,setMail ]=useState({
       to:'',
       subject:'',
@@ -54,7 +53,6 @@ const mail_send=useApi(API_URLS.composeNew);
   const handleChange=(e)=>{
   setMail({...mail,[e.target.name]:e.target.value});
   console.log(mail);
-  // props.setdatafromChild({...mail});
   }
 
   //function to send mail
@@ -168,11 +166,11 @@ const ToField=styled(Box)({
    justifyContent:'flex-start',
    alignItems:'center',
    gap:10,
-    borderBottom:"1px solid rgba(0, 0, 0, 0.12)",
-    borderRadius:0,
-    marginBottom:10,
+   borderBottom:"1px solid rgba(0, 0, 0, 0.12)",
+   borderRadius:0,
+   marginBottom:10,
     "input":{
-      width:'100%',
+     width:'100%',
     }
 });
 
@@ -186,23 +184,23 @@ const FormField=styled(Box)({
 });
 
 const ButtonWrap=styled(Box)({
-  display:'flex',
-  flexDirection:'row',
+   display:'flex',
+   flexDirection:'row',
 });
 
 const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  overflow: "hidden",
-  width: 1
+   clip: "rect(0 0 0 0)",
+   clipPath: "inset(50%)",
+   overflow: "hidden",
+   width: 1
 });
 
 const Upload=styled(Button)({
-     width:'min-content',
-     padding:'2px',
-     margin:'4px',
-     background:'grey',
-     color:'white' ,
+    width:'min-content',
+    padding:'2px',
+    margin:'4px',
+    background:'grey',
+    color:'white' ,
     "&:hover":{
       background:'grey',
     },

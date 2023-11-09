@@ -5,14 +5,12 @@ import { Star, StarBorder } from '@mui/icons-material';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import LabelImportantOutlinedIcon from '@mui/icons-material/LabelImportantOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { setDelete } from '../components/redux-container/slices/emailSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
-import { setDraft } from '../components/redux-container/slices/emailSlice';
 import CustomizedDialogs from '../components/Dialog_Box/CreateDialogBox';
-import { setStartoggler,setImportanttoggler } from '../components/redux-container/slices/emailSlice'; 
+import { setStartoggler,setImportanttoggler,setDraft,setDelete } from '../components/redux-container/slices/emailSlice'; 
 
 function DraftPage() {
     const state=useSelector((state)=>state.email);
@@ -44,7 +42,7 @@ function DraftPage() {
         const res=await getDraftMail.call({},token);
       if(res.status){
        console.log(res.data);
-       const data=res.data.DraftMail;
+       const data=res.data.DraftMsg;
        dispatch(setDraft(data));
       }
      } catch (error) {
@@ -67,11 +65,9 @@ function DraftPage() {
      setMsgId(msgId);
     const editedmail=draft.find((msg)=>msg._id==msgId);
     setValue({...value,to:editedmail?.to,subject:editedmail?.subject
- ,content:editedmail?.content
- });
+          ,content:editedmail?.content});
     }
   }
-
   const toggleStarredMail=async(e)=>{
     e.stopPropagation()
 
@@ -79,9 +75,7 @@ try {
   const msgId=e.target.closest('.row').children[1].id;
   console.log(msgId);
   const params=msgId  
-    console.log(token,"jwt");
     dispatch(setStartoggler(params));
-   
     let res=await toggler.call({},token,params);
     console.log(res);
   
@@ -120,7 +114,7 @@ const toggleImportantMail=async(event)=>{
       const update=await getDraftMail.call({},token);
       console.log(update);
       if(update.status){
-      const data = update.data.DraftMail;
+      const data = update.data.DraftMsg;
       dispatch(setDraft(data));
        }
       }
@@ -163,7 +157,7 @@ return (
                  </IconButton>
                )}  
                 {msg.important?(
-               <IconButton >
+               <IconButton onClick={toggleImportantMail}>
                  <LabelImportantIcon
                  style={{color: "#FADA5E"}}/>
                </IconButton>
@@ -177,9 +171,8 @@ return (
         <Message  id={msg._id}  >
           <div >{msg.sender_name||msg.reciver_name}</div>
           <div>{msg.subject}</div>
-          <div>{msg.date}</div>
-          
-        <div>
+          <div>{msg.date.slice(0,10)}</div>
+          <div>
           <IconButton onClick={handleDelete} className='delete'>
            <DeleteIcon/>
           </IconButton>

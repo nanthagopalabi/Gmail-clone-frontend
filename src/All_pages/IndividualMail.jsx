@@ -22,7 +22,7 @@ useEffect(()=>{
       opened= await send.find((element)=>element._id ==msgId);
       setMessage(opened);
     }else if(type=='starred'){
-      opened= await starred.find((element)=>element._id ==messageid);
+      opened= await starred.find((element)=>element._id ==msgId);
       setMessage(opened);
     }
   }

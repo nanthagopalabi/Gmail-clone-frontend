@@ -13,13 +13,13 @@ function MailHeader() {
     <Wrapper>
       <ButtonGroup variant="outlained" >
         <Button >
-            <Checkbox/>
-        </Button>
-         <Button size="large">
+          <Checkbox/>
+           </Button>
+           <Button size="large">
            <ArrowDropDownIcon/>
-         </Button>
-      </ButtonGroup>
-        <RefreshIcon/>
+           </Button>
+          </ButtonGroup>
+         <RefreshIcon/>
         <MoreVertIcon/>
     </Wrapper>
   )

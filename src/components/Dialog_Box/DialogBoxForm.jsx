@@ -48,7 +48,6 @@ const uploadFile=async(e)=>{
     
     const handleSelectFile = (e) =>{
       setFile(e.target.files[0]);
-
     }
 
     const handleChange=(e)=>{
@@ -69,97 +68,83 @@ const uploadFile=async(e)=>{
         console.log(error);
       }
     }
-  return (
+return (
     <Box
       component="form"
       sx={{
         width:"500px",
         '& > :not(style)': { m: 0, width: '100%' },
-      }}
-      noValidate
-      autoComplete="off"
-      encType="multipart/form-data"
-      method='post'>
-
-      <FormField>
-      <ToField >
-      <FormLabel htmlFor='to'>To  </FormLabel>
-        <InputBase
-    placeholder="Recipient"
-    name="to"
-    id='to'
-    onChange={handleChange}/>
-
-    </ToField>
-      
-      <ToField >
-      
-      <InputBase
-    placeholder="Subject"
-    name="subject"
-    id='subject'
-    onChange={handleChange}/>
-
-      </ToField>
-      <ToField >
-      
-      <InputBase fullWidth id="to" placeholder=''
-       multiline
-       rows={10}
-      variant="standard" 
-      name='content'
-      onChange={handleChange}/>
-      
-      </ToField>
-       {file&&<p >
-        <a id='file-name'
-        target='new'
-        >{file.name}</a>
-
-      <IconButton onClick={()=>setFile(null)}>x</IconButton>
-      </p>} 
-      
-      <input type='file' id='file' name='file'
-       onChange={handleSelectFile}
-       multiple={false}
-      />
-      <Upload onClick={uploadFile}>
-        upload
-      </Upload>
-
-      </FormField>
-          
-      <ButtonWrap>
-            <ButtonGroup>
-          <Button autoFocus   variant="contained" color="primary"
-          onClick={handleSend}
-          >
-            Send  
-          </Button>
-          <Button size='small'>
-            <ExpandMoreIcon/>
-          </Button>
-          </ButtonGroup>
-          
-          {/* <Button component="label" startIcon={<AttachFileIcon />}>
-        <VisuallyHiddenInput type="file" />
-      </Button> */}
-      <IconButton
-        aria-label="more"
-        id="long-button"
-        aria-controls={open ? "long-menu" : undefined}
-        aria-expanded={open ? "true" : undefined}
-        aria-haspopup="true"
+        }}
+        noValidate
+        autoComplete="off"
+        encType="multipart/form-data"
+        method='post'>
+       
+       <FormField>
+        <ToField >
+         <FormLabel htmlFor='to'>To  </FormLabel>
+          <InputBase
+            placeholder="Recipient"
+            name="to"
+            id='to'
+            onChange={handleChange}/>
+          </ToField>
+            
+           <ToField >
+            <InputBase
+              placeholder="Subject"
+              name="subject"
+              id='subject'
+              onChange={handleChange}/>
+          </ToField>
         
-      >
-        <MoreVertIcon />
-      </IconButton>
-         
-      <Button>
-            <DeleteForeverIcon/>
-          </Button>
-          </ButtonWrap>
-    </Box>
+          <ToField >
+           <InputBase fullWidth id="to" placeholder=''
+            multiline
+            rows={10}
+            variant="standard" 
+            name='content'
+            onChange={handleChange}/>
+          </ToField>
+           {file&&<p >
+           <a id='file-name'
+            target='new'
+            >{file.name}</a>
+              <IconButton onClick={()=>setFile(null)}>x</IconButton>
+               </p>} 
+     
+          <input type='file' id='file' name='file'
+            onChange={handleSelectFile}
+              multiple={false}/>
+              <Upload onClick={uploadFile}>
+                upload
+              </Upload>
+              </FormField>  
+        
+               <ButtonWrap>
+                 <ButtonGroup>
+                   <Button autoFocus   variant="contained" color="primary"
+                    onClick={handleSend}>
+                      Send  
+                    </Button>
+                      <Button size='small'>
+                      <ExpandMoreIcon/>
+                    </Button>
+                </ButtonGroup>
+        
+           <IconButton
+             aria-label="more"
+             id="long-button"
+             aria-controls={open ? "long-menu" : undefined}
+             aria-expanded={open ? "true" : undefined}
+             aria-haspopup="true">
+            <MoreVertIcon />
+           </IconButton>     
+          <Button>
+        <DeleteForeverIcon/>
+      </Button>
+    </ButtonWrap>
+  </Box>
   )
 }
 export default MailForm
@@ -169,40 +154,40 @@ const ToField=styled(Box)({
    justifyContent:'flex-start',
    alignItems:'center',
    gap:10,
-    borderBottom:"1px solid rgba(0, 0, 0, 0.12)",
-    borderRadius:0,
-    marginBottom:10
+   borderBottom:"1px solid rgba(0, 0, 0, 0.12)",
+   borderRadius:0,
+   marginBottom:10
 });
 
 const FormField=styled(Box)({
-    display:'flex',
-    flexDirection:'column',
-    justifyContent:'stretch',
+   display:'flex',
+   flexDirection:'column',
+   justifyContent:'stretch',
   "&>:last-child":{
     borderBottom:'none'
   }  
 });
 
 const ButtonWrap=styled(Box)({
-  display:'flex',
-  flexDirection:'row',
+   display:'flex',
+   flexDirection:'row',
 });
 
 const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  overflow: "hidden",
-  width: 1
+   clip: "rect(0 0 0 0)",
+   clipPath: "inset(50%)",
+   overflow: "hidden",
+   width: 1
 });
 
 const Upload=styled(Button)({
-     width:'min-content',
-     padding:'2px',
-     margin:'4px',
-     background:'grey',
-     color:'white' ,
+    width:'min-content',
+    padding:'2px',
+    margin:'4px',
+    background:'grey',
+    color:'white' ,
     "&:hover":{
-      background:'grey',
+    background:'grey',
     },
     "&:focus":{
       border:'none',

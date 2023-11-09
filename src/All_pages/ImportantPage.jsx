@@ -9,7 +9,7 @@ import { API_URLS } from '../service/centralUrl';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setImportant,setDelete } from '../components/redux-container/slices/emailSlice';
+import { setImportant,setDelete,setImportanttoggler,setStartoggler } from '../components/redux-container/slices/emailSlice';
 import { useEffect } from 'react';
 
 function Important() {
@@ -23,12 +23,14 @@ function Important() {
   const getImportantMail=useApi(API_URLS.getImportantMsg);
   const toggler=useApi(API_URLS.markStarredMsg);
   const mailDelete=useApi(API_URLS.deleteMsg);
+  const ImportantLabel=useApi(API_URLS.markImportantMsg);
   
   const fetchdata=async()=>{  
     try {
       const res=await getImportantMail.call({},token);
     if(res.status){
-      const data=res.data.filteredImpMsg;
+        console.log(res);
+      const data=res.data.filteredImpMsg[0]?.checkMsg
         dispatch(setImportant(data));
      } 
     } catch (error) {
@@ -51,40 +53,55 @@ function Important() {
   }
   }
   
-  const toggleStarredMail=async()=>{
+const toggleStarredMail=async(event)=>{
   try {
-    const params='653e82ba81a6bb3977f4a943'
+    const msgId=event.target.closest('.row').children[1].id;
+    console.log(msgId);
+    const params=msgId  
     console.log(token,"jwt");
+    dispatch(setStartoggler(params));
     let res=await toggler.call({},token,params);
-    console.log(res);
-    
-  } catch (error) {
-   console.log(error);     
-  }
-  }
+    fetchdata();
+    console.log(res);  
+    } catch (error) {
+     console.log(error);     
+    }
+}
 
-  const handleDelete=async(event)=>{
+const handleDelete=async(event)=>{
   try {    
     let msgId=event.target.closest('.row').children[1].id;
-  const params=msgId;
-  console.log(params);
-  dispatch(setDelete(msgId));
-   const res= await mailDelete.call({},token,params);
-   console.log(res);
-  if(res.status){
+    const params=msgId;
+    console.log(params);
+    dispatch(setDelete(msgId));
+    const res= await mailDelete.call({},token,params);
+    console.log(res);
+    if(res.status){
      const update=await getImportantMail.call({},token);
      if(update.status){
-      const data = update.data.filteredImpMsg;
-          dispatch(setImportant(data));
+      const data = update.data.filteredImpMsg[0]?.checkMsg
+      dispatch(setImportant(data));
      }
   }
   } catch (error) { 
     console.log(error);
-  }
-    
-  }
-  
-  return (
+  }    
+}
+
+const toggleImportantMail=async(event)=>{
+    try {
+      const msgId=event.target.closest('.row').children[1].id;
+      console.log(msgId);
+      const params=msgId  
+      dispatch(setImportanttoggler(params));
+      let res=await ImportantLabel.call({},token,params);
+      console.log(res); 
+      fetchdata();
+      } catch (error) {
+      console.log(error);     
+    }
+}
+return (
   <Layout>
       <MailContainer>
        {important?.map((msg)=>(
@@ -108,21 +125,21 @@ function Important() {
         </IconButton>
    )}  
    {msg.important?(
-    <IconButton >
+    <IconButton onClick={toggleImportantMail}>
     <LabelImportantIcon
     style={{  color: "#FADA5E" }}/>
    </IconButton>
    ):(
-    <IconButton>
+    <IconButton onClick={toggleImportantMail}>
     <LabelImportantOutlinedIcon />
     </IconButton>
    )
    }
     </Icons>
           <Message  id={msg._id}  >
-          <div >{msg.sender_name||msg.reciver_name}</div>
+          <div >{msg.sender_name||msg.receiver_name}</div>
          <div>{msg.subject}</div>
-         <div>{msg.date.slice(0,10)}</div>
+         <div>{msg.date}</div>
          <div >
           <IconButton onClick={handleDelete} className='delete'>
            <DeleteIcon/>
@@ -158,7 +175,6 @@ const Row=styled(Box)({
    "&:hover":{
     backgroundColor:'lightyellow'
    }
-   
 });
 
 const Message=styled('div')({
@@ -169,11 +185,8 @@ const Message=styled('div')({
   alignItems:'center',
   "& > *":{
     display:'flex',
-    
   }
-  
  });
-
 
  const Icons=styled('div')({
   display:'flex',

@@ -12,22 +12,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState } from 'react';
 import { API_URLS } from '../service/centralUrl';
 import useApi from '../hook/useApi';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
-
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Nanthagopal
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -65,29 +61,8 @@ const handleSubmit = async() => {
     const res = await createRegister.call(formik.values,'');
     console.log("Registration successful");
     if(res.status){
-      // toast.success("Registered Successfully", {
-      //   position: "top-center",
-      //   autoClose: 1500,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "colored",
-      // });
       navigate('/');
       return 
-    }else {
-      // toast.error("Unable to Register", {
-      //   position: "top-center",
-      //   autoClose: 1500,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "colored",
-      // });
     }
    } catch (error) {
     console.log(error);

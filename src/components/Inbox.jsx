@@ -1,6 +1,4 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import StarBorderIcon from "@mui/icons-material/StarBorder";
 import styled from 'styled-components';
 import { Box, IconButton,  } from '@mui/material';
 import Checkbox from "@mui/material/Checkbox";
@@ -14,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import LabelImportantOutlinedIcon from '@mui/icons-material/LabelImportantOutlined';
-import { setDelete } from './redux-container/slices/emailSlice.js';
+import { setDelete, setStartoggler,setImportanttoggler } from './redux-container/slices/emailSlice.js';
 
 function Inbox() {
 const navigate=useNavigate(); 
@@ -52,7 +50,7 @@ const handleDelete=async(e)=>{
   if(res.status){
      const update=await getInbox.call({},token);
      if(update.status){
-      const data = update.data.InboxMail;
+      const data = update.data.message;
           dispatch(setInbox(data));
      }
   }
@@ -117,13 +115,13 @@ return (
            <Checkbox size='small'/>
           </IconButton>
            {msg.starred?(
-           <IconButton>
+           <IconButton onClick={toggleStarredMail}>
             <Star
             fontSize="medium"
             style={{ marginRight: 10, color: "#FADA5E" }} />
            </IconButton>
          ) : (
-          <IconButton>
+          <IconButton  onClick={toggleStarredMail}>
             <StarBorder
              fontSize="small"
              style={{  }} />
@@ -159,7 +157,6 @@ export default Inbox
 
 const Row=styled(Box)({
   display:'grid',
-  // gridTemplateColumns:'10% 10% auto 5%',
   gridTemplateColumns:'15%  85%',
   width:'100%',
   placeItems:'center',

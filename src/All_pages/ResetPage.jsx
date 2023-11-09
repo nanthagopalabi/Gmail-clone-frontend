@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -16,7 +14,7 @@ import { useState } from 'react';
 import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
 import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+
 
 const defaultTheme = createTheme();
 
@@ -35,31 +33,7 @@ const getReset = useApi(API_URLS.resetPass);
      const res= await getReset.call(reset,'',resetToken);
 
      if(res.status){
-      console.log("password resetted succesfully");  
-
-      toast.success("Password reset Successfully", {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
      naviagte('/');
-
-     }else{
-      toast.error("Unable to reset Password", {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
      }
     } catch (error) {
         console.log(error);
@@ -72,7 +46,7 @@ const getReset = useApi(API_URLS.resetPass);
   console.log(reset);
  }
 
-  return (
+return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -106,8 +80,7 @@ const getReset = useApi(API_URLS.resetPass);
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            >
-              Save new Password
+            >Save new Password
             </Button>
             <Grid container>
               <Grid item xs>
