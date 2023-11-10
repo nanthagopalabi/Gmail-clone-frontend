@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //creating cartslice
 export const emailSlice=createSlice({
-    name:"email",
+    name:'email',
     initialState:{user:{
         token:localStorage.getItem('token')||null,
         email:null
@@ -15,13 +15,13 @@ export const emailSlice=createSlice({
         return
       },
      setInbox:(state,action)=>{
-        action.payload.forEach(element => {
-        state.inbox.every((msg)=>element._id!==msg._id) ? state.inbox.push(element):null
+        action.payload?.forEach(element => {
+        state.inbox.every((msg)=>element?._id!==msg._id) ? state.inbox.push(element):null
        });
      },
      setSend:(state,action)=>{
         action.payload.forEach(element => {
-        state.send.every((msg)=>element._id!==msg._id) ? state.send.push(element):null 
+        state.send.every((msg)=>element?._id!==msg._id) ? state.send.push(element):null 
        });
       },
 
@@ -53,7 +53,7 @@ export const emailSlice=createSlice({
   }else if(state.draft.some((message)=>message._id==action.payload)){
     const updatedDraft = state.draft.filter((message) => message._id !== action.payload);
     const updatedStarred = state.starred.filter((message) => message._id !== action.payload);
-    const updatedImportant = state.important.filter((message) => message._id !== action.payload);   
+    const updatedImportant = state.important.filter((message) => message._id !== action.payload);
     return {
       ...state,
       draft: updatedDraft,
@@ -66,7 +66,7 @@ export const emailSlice=createSlice({
    },
   
      setDraft:(state,action)=>{
-        action.payload.forEach(element => {
+        action.payload?.forEach(element => {
         state.draft.every((msg)=>element._id!==msg._id) ? state.draft.push(element):null     
       });
     },
@@ -80,7 +80,13 @@ export const emailSlice=createSlice({
       const updatedImportant=action.payload
       return {...state,important:updatedImportant}
      },
-     
+
+     setTrash:(state,action)=>{
+        action.payload?.forEach(element => {
+        state.trash.every((msg)=>element?._id!==msg?._id) ? state.trash.push(element):null  
+      });
+    },
+
      setStartoggler:(state,action)=>{
         
       if (state.send.some((message)=>message._id==action.payload)) {
@@ -89,32 +95,33 @@ export const emailSlice=createSlice({
             // Toggle the starred property for the matching message
             return { ...message, starred: !message.starred };
           }
-          return message; // Return unchanged messages
+          return message; 
         });
         const updatedStarred = state.starred?.map(message => {
           if (message._id === action.payload) {
             // Toggle the starred property for the matching message
             return { ...message, starred: !message.starred };
           }
-          return message; // Return unchanged messages
+          return message; 
         });
        
         // Return a new state object with the updated 'send' array
-        return { ...state, send: updatedSend,starred:updatedStarred, };
+        return { ...state, send: updatedSend,starred:updatedStarred,};
+
       }else if(state.inbox.some((message)=>message._id==action.payload)){
         const updatedInbox = state.inbox.map(message => {
           if (message._id === action.payload) {
             // Toggle the starred property for the matching message
             return { ...message, starred: !message.starred };
           }
-          return message; // Return unchanged messages
+          return message; 
         });
         const updatedStarred = state.starred?.map(message => {
           if (message._id === action.payload) {
             // Toggle the starred property for the matching message
             return { ...message, starred: !message.starred };
           }
-          return message; // Return unchanged messages
+          return message;
         });
        
         return { ...state, inbox: updatedInbox ,starred:updatedStarred};
@@ -125,14 +132,14 @@ export const emailSlice=createSlice({
             // Toggle the starred property for the matching message
             return { ...message, starred: !message.starred };
           }
-          return message; // Return unchanged messages
+          return message; 
         });
         const updatedStarred = state.starred.map(message => {
           if (message._id === action.payload) {
             // Toggle the starred property for the matching message
             return { ...message, starred: !message.starred };
           }
-          return message; // Return unchanged messages
+          return message; 
         });
         return { ...state, draft: updatedDraft,starred:updatedStarred }    
       }
@@ -149,7 +156,7 @@ export const emailSlice=createSlice({
                   // Toggle the starred property for the matching message
                   return { ...message, important: !message.important };
                 }
-                return message; // Return unchanged messages
+                return message;
               }); 
               
             const updatedImportant = state.important?.map(message => {
@@ -157,19 +164,19 @@ export const emailSlice=createSlice({
                   // Toggle the starred property for the matching message
                   return { ...message, important: !message.important };
                 }
-                return message; // Return unchanged messages
+                return message;
               });
 
             // Return a new state object with the updated 
               return { ...state,send:updatedSend,important:updatedImportant };
-            }
-            else if(state.inbox.some((message)=>message._id==action.payload)){
+            
+            }else if(state.inbox.some((message)=>message._id==action.payload)){
               const updatedInbox = state.inbox.map(message => {
                 if (message._id === action.payload) {
                   // Toggle the starred property for the matching message
                   return { ...message, important: !message.important };
                 }
-                return message; // Return unchanged messages
+                return message; 
               });
               
               const updatedImportant = state.important?.map(message => {
@@ -177,7 +184,7 @@ export const emailSlice=createSlice({
                   // Toggle the starred property for the matching message
                   return { ...message, important: !message.important };
                 }
-                return message; // Return unchanged messages
+                return message; 
               });
               return { ...state, inbox: updatedInbox,important:updatedImportant};
           
@@ -187,7 +194,7 @@ export const emailSlice=createSlice({
                   // Toggle the starred property for the matching message
                   return { ...message, important: !message.important };
                 }
-                return message; // Return unchanged messages
+                return message; 
               });
              
               const updatedImportant = state.important?.map(message => {
@@ -195,16 +202,16 @@ export const emailSlice=createSlice({
                   // Toggle the starred property for the matching message
                   return { ...message, important: !message.important };
                 }
-                return message; // Return unchanged messages
+                return message;
               });
 
-              return { ...state, draft:updatedDraft,important:updatedImportant,starred:updatedStarred };
+              return { ...state, draft:updatedDraft,important:updatedImportant};
             }
           //   If the message is not found, return the unchanged state
             return state;
            }
-        },    
+        },
     });    
 export default emailSlice.reducer;
-export const {setToken,setInbox,setSend,setDelete,setDraft,setImportant,
+export const {setToken,setInbox,setSend,setDelete,setDraft,setImportant,setTrash,
 setStarred,setStartoggler,setImportanttoggler} = emailSlice.actions

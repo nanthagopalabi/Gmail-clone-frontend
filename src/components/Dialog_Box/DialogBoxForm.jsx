@@ -1,9 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, {useEffect,useState } from 'react'
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Button, ButtonGroup, DialogContent, FormLabel, IconButton, InputBase, Paper, styled } from '@mui/material';
-import { Field, Form } from 'formik';
-import axios from "axios";
+import { Button, ButtonGroup, FormLabel, IconButton, InputBase, styled } from '@mui/material';
+import useApi from '../../hook/useApi';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -52,7 +50,10 @@ const uploadFile=async(e)=>{
 
     const handleChange=(e)=>{
        setMail({...mail,[e.target.name]:e.target.value});
+       props.setdatafromChild({...mail});
        console.log(mail)
+       props.setdatafromChild({ ...mail });
+       props.updateMailState(mail);
     }
 
     const handleSend=async(e)=>{
@@ -68,6 +69,22 @@ const uploadFile=async(e)=>{
         console.log(error);
       }
     }
+
+    useEffect(()=>{
+      if(props.value){      
+        document.getElementById('to').value=props.value.to||"";
+        document.getElementById('subject').value=props.value.subject||"";
+        document.getElementById('content').value=props.value.content||"";
+  
+      if(props.setClicked){
+        document.getElementById('send').onclick=function(){
+          props.setClicked(true);
+          console.log("from mail");
+        }
+      }   
+      }        
+    },[])
+
 return (
     <Box
       component="form"
@@ -99,7 +116,7 @@ return (
           </ToField>
         
           <ToField >
-           <InputBase fullWidth id="to" placeholder=''
+           <InputBase fullWidth id="content" placeholder=''
             multiline
             rows={10}
             variant="standard" 
@@ -156,7 +173,10 @@ const ToField=styled(Box)({
    gap:10,
    borderBottom:"1px solid rgba(0, 0, 0, 0.12)",
    borderRadius:0,
-   marginBottom:10
+   marginBottom:10,
+   "input":{
+    width:'100%',
+   }
 });
 
 const FormField=styled(Box)({

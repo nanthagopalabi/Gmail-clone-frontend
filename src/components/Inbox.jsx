@@ -5,14 +5,13 @@ import Checkbox from "@mui/material/Checkbox";
 import { Star, StarBorder } from '@mui/icons-material';
 import { API_URLS } from '../service/centralUrl';
 import { useDispatch, useSelector } from 'react-redux';
-import {setInbox} from './redux-container/slices/emailSlice.js'
 import useApi from '../hook/useApi';
 import Layout from './MsgBodyPage/Layout';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import LabelImportantOutlinedIcon from '@mui/icons-material/LabelImportantOutlined';
-import { setDelete, setStartoggler,setImportanttoggler } from './redux-container/slices/emailSlice.js';
+import { setDelete, setStartoggler,setImportanttoggler,setInbox } from './redux-container/slices/emailSlice.js';
 
 function Inbox() {
 const navigate=useNavigate(); 
@@ -80,11 +79,9 @@ const params=msgId
   const toggleImportantMail=async(e)=>{
     try {
       const msgId=e.target.closest('.row').children[1].id;
-    console.log(msgId);
-    const params=msgId  
-      // console.log(token,"jwt");
+      console.log(msgId);
+      const params=msgId  
       dispatch(setImportanttoggler(params));
-      // console.log(...send);
       let res=await ImportantLabel.call({},token,params);
       console.log(res);
       

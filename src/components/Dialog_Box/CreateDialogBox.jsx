@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import MailForm from '../MsgBodyPage/MailForm';
 import { Box, NativeSelect } from '@mui/material';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { API_URLS } from '../../service/centralUrl';
 import useApi from '../../hook/useApi';
 
@@ -32,18 +32,27 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   const handlex=()=>{
   props.handleClose();
   }  
-  const Save=useApi(API_URLS.saveDraftEmails);
+  const Save=useApi(API_URLS.saveDraftMsg);
   const saveDraft = async(mail)=>{ 
     try {
       const token=localStorage.getItem('token');
+      console.log(token, mail)
+
       const res = await Save.call({...mail},token);
       console.log(res);
        if(res.status){
+        console.log(res)
        }
     } catch (error) {
       console.log(error);
    }
   }
+  const check=async()=>{
+    handlex();
+    console.log(datafromChild)
+    await saveDraft(datafromChild);
+  }
+
 return (
     <div >
       <BootstrapDialog
@@ -57,7 +66,7 @@ return (
         </DialogTitle>
         <IconButton
           aria-label="close"
-          onClick={handlex}
+          onClick={check}
           sx={{
             position: 'absolute',
             right: 8,
@@ -67,7 +76,13 @@ return (
           <CloseIcon/>
         </IconButton>
           <DialogContent dividers>
-            <MailForm handlex={handlex} /> 
+
+            <MailForm handlex={handlex} 
+            open={props.open}
+            setdatafromChild={props.setdatafromChild} 
+            value={props.value} 
+            setClicked={props.setClicked}/>
+
           </DialogContent>
           <DialogActions>
         </DialogActions>

@@ -41,9 +41,9 @@ function DraftPage() {
      try {
         const res=await getDraftMail.call({},token);
       if(res.status){
-       console.log(res.data);
-       const data=res.data.DraftMsg;
+       const data=res.data.message;
        dispatch(setDraft(data));
+       console.log(data)
       }
      } catch (error) {
        console.log(error);
@@ -53,11 +53,12 @@ function DraftPage() {
   const handleClick=(event)=>{
   let msgId=event.target.id;
     if(msgId){
-      setOpen(true);
       setMsgId(msgId);
+      setOpen(true);
       const editedmail=draft.find((msg)=>msg._id==msgId);
-      setValue({...value,to:editedmail.to,subject:editedmail.subject
-        ,content:editedmail.content
+      console.log(editedmail)
+      setValue({...value,to:editedmail?.to,subject:editedmail?.subject
+        ,content:editedmail?.content
     });
     }else{
      msgId=event.target.parentElement.id
@@ -69,7 +70,7 @@ function DraftPage() {
     }
   }
   const toggleStarredMail=async(e)=>{
-    e.stopPropagation()
+    e.stopPropagation();
 
 try {
   const msgId=e.target.closest('.row').children[1].id;
@@ -114,7 +115,7 @@ const toggleImportantMail=async(event)=>{
       const update=await getDraftMail.call({},token);
       console.log(update);
       if(update.status){
-      const data = update.data.DraftMsg;
+      const data = update.data.message;
       dispatch(setDraft(data));
        }
       }
@@ -169,7 +170,7 @@ return (
               }
             </Icons>
         <Message  id={msg._id}  >
-          <div >{msg.sender_name||msg.reciver_name}</div>
+          <div >{msg.sender_name||msg.receiver_name}</div>
           <div>{msg.subject}</div>
           <div>{msg.date.slice(0,10)}</div>
           <div>
@@ -188,7 +189,6 @@ return (
 export default DraftPage
 
   const MailContainer=styled(Box)({
-    // width:'100%',
     height:'100%',
     display:'flex',
     flexDirection:'column',
@@ -197,7 +197,6 @@ export default DraftPage
   
   const Row=styled(Box)({
     display:'grid',
-    // gridTemplateColumns:'10% 10% auto 5%',
     gridTemplateColumns:'15%  auto',
     width:'100%',
     placeItems:'center',

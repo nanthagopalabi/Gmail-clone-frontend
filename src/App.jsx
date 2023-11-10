@@ -13,6 +13,7 @@ import SendPage from './All_pages/SendPage';
 import Important from './All_pages/ImportantPage';
 import StarredPage from './All_pages/StarredPage';
 import ErrorPage from './All_pages/ErrorPage';
+import Trash from './All_pages/TrashPage';
 
 function App() {
 const [token, setToken] = useState(localStorage.getItem('token')||null);
@@ -32,9 +33,10 @@ const [token, setToken] = useState(localStorage.getItem('token')||null);
           <Route path='/outbox' element={<SendPage/>}/>
           <Route path='/forget' Component={Forget}/>
           <Route path='/reset/:token' Component={Reset}/>
-          <Route path='/GetDraft' Component={DraftPage}/>
+          <Route path='/CreateDraft' Component={DraftPage}/>
           <Route  path='/starred' Component={StarredPage} />
-          <Route  path='/important' Component={Important} />
+          <Route  path='/imp' Component={Important} />
+          <Route path='/trash' Component={Trash}/>
           <Route path='*' Component={ErrorPage}/>
         </Routes>
       </BrowserRouter>

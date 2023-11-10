@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 function Important() {
   const state=useSelector((state)=>state.email);
   const {important}=state;
-
+  
   const token=useSelector((state)=>state.email.user.token);
   const dispatch=useDispatch();
   const navigate=useNavigate();
@@ -31,6 +31,7 @@ function Important() {
     if(res.status){
         console.log(res);
       const data=res.data.filteredImpMsg[0]?.checkMsg
+      console.log(data);
         dispatch(setImportant(data));
      } 
     } catch (error) {
@@ -46,10 +47,10 @@ function Important() {
   let msgId=event.target.id;
   
   if(msgId){
-     navigate(`/important/${msgId}`)
+     navigate(`/imp/${msgId}`)
   }else{
     msgId=event.target.parentElement.id
-   navigate(`/important/${msgId}`);
+   navigate(`/imp/${msgId}`);
   }
   }
   
@@ -138,9 +139,9 @@ return (
     </Icons>
           <Message  id={msg._id}  >
           <div >{msg.sender_name||msg.receiver_name}</div>
-         <div>{msg.subject}</div>
-         <div>{msg.date}</div>
-         <div >
+          <div>{msg.subject}</div>
+          <div>{msg.date}</div>
+          <div >
           <IconButton onClick={handleDelete} className='delete'>
            <DeleteIcon/>
           </IconButton>
@@ -155,7 +156,6 @@ return (
 export default Important
 
 const MailContainer=styled(Box)({
-  // width:'100%',
   height:'100%',
   display:'flex',
   flexDirection:'column',
@@ -165,12 +165,11 @@ const MailContainer=styled(Box)({
 });
 
 const Row=styled(Box)({
-  display:'grid',
-  gridTemplateColumns:'15%  auto',
+   display:'grid',
+   gridTemplateColumns:'15%  auto',
    width:'100%',
    placeItems:'center',
-  borderBottom:'1px solid gray',
-  
+   borderBottom:'1px solid gray',
    fontSizeAdjust:'from-font',  
    "&:hover":{
     backgroundColor:'lightyellow'

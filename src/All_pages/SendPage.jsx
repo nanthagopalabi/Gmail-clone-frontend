@@ -157,7 +157,7 @@ return (
 }
 export default SendPage
 
-const MailContainer=styled(Box)({
+export const MailContainer=styled(Box)({
    // width:'100%',
    height:'100%',
    display:'flex',
@@ -165,7 +165,7 @@ const MailContainer=styled(Box)({
    justifyContent:'flex-start',
  });
 
-const Row=styled(Box)({
+export const Row=styled(Box)({
    display:'grid',
    gridTemplateColumns:'15%  auto',
    width:'100%',
@@ -177,7 +177,7 @@ const Row=styled(Box)({
   } 
 });
 
-const Message=styled('div')({
+export const Message=styled('div')({
    display:'grid',
    gridTemplateColumns:'10% 30% 10% 5%',
    width:'100%',
@@ -188,7 +188,7 @@ const Message=styled('div')({
   //  } 
  });
 
-const Icons=styled('div')({
+export const Icons=styled('div')({
    display:'flex',
    flexShrink:'1',
    alignItems:'center'

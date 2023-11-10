@@ -13,7 +13,7 @@ export const API_URLS = {
   },
   markStarredMsg:{
       endpoint: "api/starred",
-      method: "PATCH",
+      method: "POST",
   },
   getStarredMsg:{
       endpoint: "api/starred",
@@ -21,7 +21,7 @@ export const API_URLS = {
   },
   markImportantMsg:{
       endpoint: "api/imp",
-      method: "PATCH",
+      method: "POST",
   },
   getImportantMsg:{
       endpoint: "api/imp",

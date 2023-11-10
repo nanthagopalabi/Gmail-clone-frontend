@@ -133,7 +133,7 @@ return (
         </IconButton>
     )}  
    {message.important?(
-    <IconButton >
+    <IconButton onClick={toggleImportantMail}>
     <LabelImportantIcon
     style={{  color: "#FADA5E" }}/>
    </IconButton>
@@ -145,7 +145,7 @@ return (
    }
       </Icons>
           <Message  id={message._id}  >
-          <div >{message.sender_name||message.reciver_name}</div>
+          <div >{message.sender_name||message.receiver_name}</div>
          <div>{message.subject}</div>
          <div>{message.date?.slice(0,10)}</div>
          <div >

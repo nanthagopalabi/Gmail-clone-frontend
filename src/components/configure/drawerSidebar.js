@@ -28,12 +28,12 @@ import SettingsIcon from '@mui/icons-material/Settings';
       icon:  SendIcon,
     },
     {
-      name: "drafts",
+      name: "CreateDraft",
       title: "Drafts",
       icon: InsertDriveFileIcon,
     },
     {
-      name: "important",
+      name: "imp",
       title: "Important",
       icon: LabelImportantIcon,
     },
