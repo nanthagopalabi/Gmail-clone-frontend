@@ -16,7 +16,7 @@ export const emailSlice=createSlice({
       },
      setInbox:(state,action)=>{
         action.payload?.forEach(element => {
-        state.inbox.every((msg)=>element?._id!==msg._id) ? state.inbox.push(element):null
+        state.inbox.every((msg)=>element?._id!==msg?._id) ? state.inbox.push(element):null
        });
      },
      setSend:(state,action)=>{
@@ -60,13 +60,20 @@ export const emailSlice=createSlice({
       starred:updatedStarred,
       important:updatedImportant
     };
-   }
+   }else if(state.trash.some((message)=>message._id==action.payload)){
+    const updatedTrash = state.trash.filter((message) => message._id !== action.payload);
+    return {
+      ...state,
+       trash:updatedTrash
+    }
+
+  }
    // If the message is not found, return the unchanged state
    return state;
    },
   
      setDraft:(state,action)=>{
-        action.payload?.forEach(element => {
+        action.payload.forEach(element => {
         state.draft.every((msg)=>element._id!==msg._id) ? state.draft.push(element):null     
       });
     },

@@ -47,10 +47,10 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
       console.log(error);
    }
   }
-  const check=async()=>{
+  const check=()=>{
     handlex();
     console.log(datafromChild)
-    await saveDraft(datafromChild);
+    saveDraft(datafromChild);
   }
 
 return (
@@ -78,8 +78,8 @@ return (
           <DialogContent dividers>
 
             <MailForm handlex={handlex} 
-            open={props.open}
-            setdatafromChild={props.setdatafromChild} 
+            open={open}
+            setdatafromChild={setdatafromChild} 
             value={props.value} 
             setClicked={props.setClicked}/>
 

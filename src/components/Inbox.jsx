@@ -115,7 +115,7 @@ return (
            <IconButton onClick={toggleStarredMail}>
             <Star
             fontSize="medium"
-            style={{ marginRight: 10, color: "#FADA5E" }} />
+            style={{ color: "#FADA5E" }} />
            </IconButton>
          ) : (
           <IconButton  onClick={toggleStarredMail}>
@@ -159,7 +159,7 @@ const Row=styled(Box)({
   placeItems:'center',
 
   "&:hover":{
-    // backgroundColor:'lightyellow'
+    backgroundColor:'lightyellow'
    }
 });
 

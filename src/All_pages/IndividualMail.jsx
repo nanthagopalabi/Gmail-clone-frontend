@@ -24,7 +24,7 @@ useEffect(()=>{
     }else if(type=='starred'){
       opened= await starred.find((element)=>element._id ==msgId);
       setMessage(opened);
-    }else if(type=='imp'){
+    }else if(type=='important'){
       opened= await important.find((element)=>element._id ==msgId);
       setMessage(opened);
     }else if(type=='trash'){

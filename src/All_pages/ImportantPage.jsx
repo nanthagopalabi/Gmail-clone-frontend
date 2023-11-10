@@ -29,9 +29,7 @@ function Important() {
     try {
       const res=await getImportantMail.call({},token);
     if(res.status){
-        console.log(res);
       const data=res.data.filteredImpMsg[0]?.checkMsg
-      console.log(data);
         dispatch(setImportant(data));
      } 
     } catch (error) {
@@ -47,36 +45,33 @@ function Important() {
   let msgId=event.target.id;
   
   if(msgId){
-     navigate(`/imp/${msgId}`)
+     navigate(`/important/${msgId}`)
   }else{
     msgId=event.target.parentElement.id
-   navigate(`/imp/${msgId}`);
+   navigate(`/important/${msgId}`);
   }
   }
   
 const toggleStarredMail=async(event)=>{
   try {
     const msgId=event.target.closest('.row').children[1].id;
-    console.log(msgId);
     const params=msgId  
-    console.log(token,"jwt");
     dispatch(setStartoggler(params));
     let res=await toggler.call({},token,params);
-    fetchdata();
-    console.log(res);  
+    fetchdata();  
     } catch (error) {
      console.log(error);     
     }
 }
 
 const handleDelete=async(event)=>{
+  event.stopPropagation();
   try {    
     let msgId=event.target.closest('.row').children[1].id;
     const params=msgId;
-    console.log(params);
-    dispatch(setDelete(msgId));
+    
     const res= await mailDelete.call({},token,params);
-    console.log(res);
+    dispatch(setDelete(msgId));
     if(res.status){
      const update=await getImportantMail.call({},token);
      if(update.status){
@@ -92,11 +87,9 @@ const handleDelete=async(event)=>{
 const toggleImportantMail=async(event)=>{
     try {
       const msgId=event.target.closest('.row').children[1].id;
-      console.log(msgId);
       const params=msgId  
       dispatch(setImportanttoggler(params));
       let res=await ImportantLabel.call({},token,params);
-      console.log(res); 
       fetchdata();
       } catch (error) {
       console.log(error);     
@@ -140,7 +133,7 @@ return (
           <Message  id={msg._id}  >
           <div >{msg.sender_name||msg.receiver_name}</div>
           <div>{msg.subject}</div>
-          <div>{msg.date}</div>
+          <div>{msg.date?.slice(0,10)}</div>
           <div >
           <IconButton onClick={handleDelete} className='delete'>
            <DeleteIcon/>

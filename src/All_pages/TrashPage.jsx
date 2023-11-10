@@ -21,7 +21,7 @@ function Trash() {
   const navigate=useNavigate();
   
   const getTrashEmail=useApi(API_URLS.getTrashMsg);
-  const mailDelete=useApi(API_URLS.deleteMsg);
+  const mailDelete=useApi(API_URLS.getTrashMsg);
   const ImportantLabel=useApi(API_URLS.markImportantMsg);
   
   const fetchdata=async()=>{  
@@ -42,21 +42,21 @@ function Trash() {
   },[]);
   
   const handleClick=(event)=>{
-  let messageid=event.target.id;
-  if(messageid){
-     navigate(`/trash/${messageid}`)
+  let msgId=event.target.id;
+  if(msgId){
+     navigate(`/trash/${msgId}`)
   }else{
-    messageid=event.target.parentElement.id
-   navigate(`/trash/${messageid}`);
+    msgId=event.target.parentElement.id
+   navigate(`/trash/${msgId}`);
   }}
 
   //function to delete message
   const handleDelete=async(event)=>{
   try {  
-  let messageid=event.target.closest('.row').children[1].id;
-  const params=messageid;
+  let msgId=event.target.closest('.row').children[1].id;
+  const params=msgId;
   console.log(params);
-  dispatch(setDelete(messageid));
+  dispatch(setDelete(msgId));
    const res= await mailDelete.call({},token,params);
    console.log(res);
   if(res.status){
@@ -70,20 +70,6 @@ function Trash() {
     console.log(error);
   }}
 
-  const toggleImportantMail=async(event)=>{
-    try {
-    const messageid=event.target.closest('.row').children[1].id;
-    console.log(messageid);
-    const params=messageid  
-      console.log(token,"jwt");
-      dispatch(setImportanttoggler(params));
-      let res=await ImportantLabel.call({},token,params);
-      console.log(res);      
-    } catch (error) {
-     console.log(error);     
-    }  
-  }
-
 return (
    <Layout >
     <MailContainer>
@@ -94,12 +80,12 @@ return (
          <Checkbox size='small'/>
          </IconButton>
    {message.important?(
-    <IconButton onClick={toggleImportantMail}>
+    <IconButton >
     <LabelImportantIcon
     style={{  color: "#FADA5E" }}/>
    </IconButton>
    ):(
-    <IconButton onClick={toggleImportantMail}>
+    <IconButton>
     <LabelImportantOutlinedIcon/>
     </IconButton>
    )}

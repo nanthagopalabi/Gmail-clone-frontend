@@ -50,10 +50,8 @@ const uploadFile=async(e)=>{
 
     const handleChange=(e)=>{
        setMail({...mail,[e.target.name]:e.target.value});
-       props.setdatafromChild({...mail});
        console.log(mail)
        props.setdatafromChild({ ...mail });
-       props.updateMailState(mail);
     }
 
     const handleSend=async(e)=>{
@@ -61,7 +59,6 @@ const uploadFile=async(e)=>{
       e.preventDefault();
       props.handlex();
       try {
-        console.log(mail);
         const res= await mail_send.call(mail,token);
         console.log(res);
         console.log("from send")
@@ -78,8 +75,8 @@ const uploadFile=async(e)=>{
   
       if(props.setClicked){
         document.getElementById('send').onclick=function(){
-          props.setClicked(true);
-          console.log("from mail");
+        props.setClicked(true);
+        console.log("from mail");
         }
       }   
       }        
@@ -104,7 +101,9 @@ return (
             placeholder="Recipient"
             name="to"
             id='to'
-            onChange={handleChange}/>
+            onChange={handleChange}
+            maxRows={10}
+            style={{width:'100%'}}/>
           </ToField>
             
            <ToField >
@@ -112,7 +111,8 @@ return (
               placeholder="Subject"
               name="subject"
               id='subject'
-              onChange={handleChange}/>
+              onChange={handleChange}
+              style={{width:'100%'}}/>
           </ToField>
         
           <ToField >
@@ -141,7 +141,7 @@ return (
                <ButtonWrap>
                  <ButtonGroup>
                    <Button autoFocus   variant="contained" color="primary"
-                    onClick={handleSend}>
+                    onClick={handleSend} id='send'>
                       Send  
                     </Button>
                       <Button size='small'>
