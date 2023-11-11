@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
-import { toast } from 'react-toastify';
+import './AllPages.css';
 
 const defaultTheme = createTheme();
 
@@ -26,29 +26,6 @@ export default function Forget() {
     try {
     const res=await  getForget.call(email,'')
     event.target.reset();
-    if(res.status){
-      toast.success("mail send Successfully", {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }else{
-      toast.error("Unable to send mail", {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
 
   //  console.log("password reset mail sent");
    } catch (error) {
@@ -59,15 +36,16 @@ export default function Forget() {
   const handlechange=(e)=>{
     e.preventDefault();
     setEmail({...email,[e.target.name]: e.target.value });
-//   console.log(email);
 }
   return (
     <ThemeProvider theme={defaultTheme}>
+      <Container className="imgforget">
+      <img src='http://surl.li/nbdpx'/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 20,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -114,6 +92,7 @@ export default function Forget() {
             </Grid>
           </Box>
         </Box>
+      </Container>
       </Container>
     </ThemeProvider>
   );

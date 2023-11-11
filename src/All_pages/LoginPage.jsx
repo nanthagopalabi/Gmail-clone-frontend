@@ -18,13 +18,14 @@ import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../components/redux-container/slices/emailSlice';
+import './AllPages.css';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Nanthagopal
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -69,17 +70,19 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <Container className="mainContainer">
+      <img src='http://surl.li/nbcag'/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 3,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}>
-
+            <img className='mailLogo' src='http://surl.li/ltcth'/>
+        
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -132,6 +135,7 @@ export default function SignIn() {
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
       </Container>
     </ThemeProvider>
   );

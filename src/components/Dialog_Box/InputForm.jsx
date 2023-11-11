@@ -16,7 +16,7 @@ function MailForm(props) {
       to:'',
       subject:'',
       content:'',
-      attachment:'',
+      attachments:'',
     });
         
 //file upload api
@@ -37,7 +37,7 @@ const uploadFile=async(e)=>{
     console.log(res);
     console.log(res.data.url);
     document.getElementById('file-name').setAttribute('href',res.data.url);
-    setMail({...mail,attachment:`${res.data.url}`});
+    setMail({...mail,attachments:`${res.data.url}`});
     console.log({...mail});
     } catch (error) {
       console.log(error);
@@ -148,7 +148,7 @@ return (
                       <ExpandMoreIcon/>
                     </Button>
                 </ButtonGroup>
-        
+                
            <IconButton
              aria-label="more"
              id="long-button"
@@ -195,7 +195,7 @@ const ButtonWrap=styled(Box)({
 
 const VisuallyHiddenInput = styled("input")({
    clip: "rect(0 0 0 0)",
-   clipPath: "inset(50%)",
+   clipPath: "inset(100%)",
    overflow: "hidden",
    width: 1
 });

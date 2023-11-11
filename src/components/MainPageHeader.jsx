@@ -1,11 +1,36 @@
-import { AppBar, Toolbar, styled, InputBase, Box, IconButton } from "@mui/material";
+import * as React from 'react';
 import '../App.css'
+import { AppBar, Toolbar, styled, InputBase, Box, IconButton } from "@mui/material";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { setToken } from './redux-container/slices/emailSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Menu as MenuIcon, Tune, HelpOutlineOutlined,
   SettingsOutlined, AppsOutlined, AccountCircleOutlined,
   } from "@mui/icons-material";
 
+
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 const Header = ({ toggleDrawer }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+  const logout = () => {
+    localStorage.removeItem('token');
+    dispatch(setToken(''));
+    navigate('/');
+}
 return (
   <StyledAppBar>
     <StyledToolbar>
@@ -32,9 +57,35 @@ return (
             <IconButton>
               <AppsOutlined />
             </IconButton>
-            <IconButton>
-              <AccountCircleOutlined/>
-            </IconButton>
+            <Box sx={{ flexGrow: 0 }}>
+            
+              <IconButton onClick={handleOpenUserMenu}>
+                <AccountCircleOutlined/>
+              </IconButton>
+            
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={logout}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
           </Icon>
         </IconsWrapper>  
       </StyledToolbar>

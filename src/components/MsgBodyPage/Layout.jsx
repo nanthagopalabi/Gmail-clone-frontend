@@ -19,7 +19,7 @@ function Layout({children}) {
   
 return (
    <>
-     <LayoutWrapper style={{position:'fixed', width:'100%'}}>
+     <LayoutWrapper >
       <Header toggleDrawer={toggleDrawer} />   
       <Main>
       <LeftIconBarWrapper>
@@ -64,18 +64,21 @@ export default Layout
 const LayoutWrapper=styled(Box)({
   display:"grid",
   gridTemplateRows:'auto auto',
+  position:'fixed', 
+  width:'100%',
   });
    
   const Main=styled(Box)({
     display:"grid",
     gridTemplateColumns:"0% auto 5%",
-    height:'100vh',
+    width:'100%',
+    height:'1500px'
   });
 
   const RigthSideIconBar=styled(Box)({
     display:'flex',
     flexDirection:'column',
-    height:'100vh',
+    height:'100%',
     backgroundColor:"#f2f5fa"
   });
 
@@ -124,16 +127,12 @@ const LayoutWrapper=styled(Box)({
     display: 'flex', 
     flexDirection:'column',
     flexWrap:'nowrap', 
-    height:'70%',
+    height:'100%',
     borderRadius:'20px',
     borderTopLeftRadius:0,
     borderTopRightRadius:0, 
     backgroundColor:'#f5f5f5',
     overflowY:'scroll',
-
-    "&>*:hover":{
-      backgroundColor:"#f2faf8",
-     }
   });
 
   const MainBodyWrapper=styled('div')({

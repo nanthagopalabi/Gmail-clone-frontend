@@ -1,0 +1,28 @@
+.mainContainer{
+    display:flex !important; 
+}
+
+.mailLogo{
+    width: 330px;
+    height: 180px;
+    display: grid;
+}
+.imgforget{
+    display: flex !important;
+    height:600px;
+    margin-right: 80px;
+} 
+.imgRegister{
+    display: flex !important;
+}
+
+.imgGoogle{
+    width: 240px;
+    height: 140px;
+}
+.imgError{
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;    
+}

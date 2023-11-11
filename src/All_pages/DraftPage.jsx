@@ -53,8 +53,8 @@ function DraftPage() {
   const handleClick=(event)=>{
   let msgId=event.target.id;
     if(msgId){
-      setMsgId(msgId);
       setOpen(true);
+      setMsgId(msgId);
       const editedmail=draft.find((msg)=>msg._id==msgId);
       console.log(editedmail)
       setValue({...value,to:editedmail?.to,subject:editedmail?.subject

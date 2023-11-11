@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import Layout from '../components/MsgBodyPage/Layout';
 import { MailContainer,Row,Message,Icons } from './SendPage';
-import { Box, Checkbox, IconButton, styled } from '@mui/material';
+import { Checkbox, IconButton } from '@mui/material';
 import useApi from '../hook/useApi';
 import { API_URLS } from '../service/centralUrl';
 import { useDispatch, useSelector } from 'react-redux';
-import { Star, StarBorder } from '@mui/icons-material';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import LabelImportantOutlinedIcon from '@mui/icons-material/LabelImportantOutlined';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +21,6 @@ function Trash() {
   
   const getTrashEmail=useApi(API_URLS.getTrashMsg);
   const mailDelete=useApi(API_URLS.getTrashMsg);
-  const ImportantLabel=useApi(API_URLS.markImportantMsg);
   
   const fetchdata=async()=>{  
     try {

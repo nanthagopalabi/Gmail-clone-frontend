@@ -158,7 +158,6 @@ return (
 export default SendPage
 
 export const MailContainer=styled(Box)({
-   // width:'100%',
    height:'100%',
    display:'flex',
    flexDirection:'column',
@@ -173,7 +172,7 @@ export const Row=styled(Box)({
    borderBottom:'1px solid gray',
    fontSizeAdjust:'from-font',  
    "&:hover":{
-   backgroundColor:'lightyellow'
+   backgroundColor:'lightblue'
   } 
 });
 
@@ -183,9 +182,6 @@ export const Message=styled('div')({
    width:'100%',
    justifyContent:'space-evenly',
    alignItems:'center',
-  //  "&:hover":{
-  //   display:'flex',
-  //  } 
  });
 
 export const Icons=styled('div')({

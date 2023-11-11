@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import { Box, IconButton,  } from '@mui/material';
 import Checkbox from "@mui/material/Checkbox";
 import { Star, StarBorder } from '@mui/icons-material';
-import { API_URLS } from '../service/centralUrl';
+import { API_URLS } from '../service/centralUrl.js';
 import { useDispatch, useSelector } from 'react-redux';
-import useApi from '../hook/useApi';
-import Layout from './MsgBodyPage/Layout';
+import useApi from '../hook/useApi.jsx';
+import Layout from '../components/MsgBodyPage/Layout.jsx';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import LabelImportantOutlinedIcon from '@mui/icons-material/LabelImportantOutlined';
-import { setDelete, setStartoggler,setImportanttoggler,setInbox } from './redux-container/slices/emailSlice.js';
+import { setDelete, setStartoggler,setImportanttoggler,setInbox } from '../components/redux-container/slices/emailSlice.js';
 
 function Inbox() {
 const navigate=useNavigate(); 

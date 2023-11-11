@@ -6,9 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function IndividualMail() {
     const {msgId,type}=useParams();
-    const dispatch=useDispatch();
     const {inbox,send,trash,starred,important}=useSelector((state)=>state.email);
- 
     const [message,setMessage]=useState(null);
     
 useEffect(()=>{
@@ -46,7 +44,7 @@ return (
           <p>{message.date}</p>
         </MailDetail>
       <p>{message?.content}</p>
-      {message.attachment?<a href={message.attachment} target='_new'>Attachment</a> : "" }
+      {message.attachments?<a href={message.attachments} target='_new'>Attachment</a> : "" }
         <div>
 
         </div>

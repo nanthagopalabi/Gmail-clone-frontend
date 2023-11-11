@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import SignUp from './All_pages/RegisterPage';
 import SignIn from './All_pages/LoginPage';
-import Inbox from './components/Inbox';
+import Inbox from './All_pages/Inbox';
 import { ToastContainer } from 'react-toastify';
 import Forget from './All_pages/ForgetPage';
 import { Reset } from './All_pages/ResetPage';
@@ -19,10 +18,6 @@ import { useSelector } from 'react-redux';
 function App() {
   const token=useSelector((state)=>state.email.user.token);
 
-// const logout = () => {
-//   localStorage.removeItem('token');
-//   setToken('');
-// }
   return (
     <div> 
       <BrowserRouter>

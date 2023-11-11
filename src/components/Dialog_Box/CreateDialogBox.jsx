@@ -7,26 +7,17 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import MailForm from '../MsgBodyPage/MailForm';
-import { Box, NativeSelect } from '@mui/material';
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import { API_URLS } from '../../service/centralUrl';
 import useApi from '../../hook/useApi';
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
-    justifyContent:'space-between'
-  },
-}));
-  export default function CustomizedDialogs(props) {
-    const [datafromChild,setdatafromChild]=useState({
-      to:'',
-      subject:'',
-      content:'',
-      attachment:'',
+
+export default function CustomizedDialogs(props) {
+  const [datafromChild,setdatafromChild]=useState({
+     to:'',
+     subject:'',
+     content:'',
+     attachments:'',
   });
 
   const handlex=()=>{
@@ -78,7 +69,6 @@ return (
           <DialogContent dividers>
 
             <MailForm handlex={handlex} 
-            open={open}
             setdatafromChild={setdatafromChild} 
             value={props.value} 
             setClicked={props.setClicked}/>
@@ -91,20 +81,12 @@ return (
   );
 }
 
-const ButtonWrap=styled(Box)({
-  display:'flex',
-  alignItems:'center',
- 
-  "&>Button:first-child":{
-    marginLeft:10,
-    borderRadius:18
-  }
-});
-
-const ScheduleButton=styled(NativeSelect)({
-  width:'10',
-  height:'min-content',
-  "& > *":{
-    minWidth:10
-  }
-});
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+    justifyContent:'space-between'
+  },
+}));

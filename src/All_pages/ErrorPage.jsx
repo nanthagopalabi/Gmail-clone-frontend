@@ -4,7 +4,7 @@ import Layout from '../components/MsgBodyPage/Layout'
 function ErrorPage() {
   return (
    <Layout>
-    <h1>page not found</h1>
+    <img className='imgError' src='http://surl.li/nbdqu'/>
    </Layout>
   )
 }
