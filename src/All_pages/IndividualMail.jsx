@@ -2,7 +2,7 @@ import { Box, styled } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Layout from '../components/MsgBodyPage/Layout';
 import {  useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function IndividualMail() {
     const {msgId,type}=useParams();

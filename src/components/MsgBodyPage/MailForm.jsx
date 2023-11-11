@@ -52,6 +52,7 @@ const mail_send=useApi(API_URLS.composeNew);
   //function to handle to mail details
   const handleChange=(e)=>{
   setMail({...mail,[e.target.name]:e.target.value});
+  props.setdatafromChild({ ...mail, [e.target.name]: e.target.value });
   console.log(mail);
   }
 
@@ -59,30 +60,46 @@ const mail_send=useApi(API_URLS.composeNew);
     const handleSend=async(e)=>{
       e.stopPropagation();
       e.preventDefault();
-      props.handlex();
 
       try {
+        console.log("Sending mail:", mail);
+        props.setdatafromChild(mail);
         const res= await mail_send.call(mail,token);
         console.log(res);
       } catch (error) {        
         console.log(error);
       }
+      props.handlex();
     }
-    useEffect(()=>{
-      if(props.value){
-        
-        document.getElementById('to').value=props.value.to||"";
-        document.getElementById('subject').value=props.value.subject||"";
-        document.getElementById('content').value=props.value.content||"";
-        
-      if(props.setClicked){
-        document.getElementById('send').onclick=function(){
-          props.setClicked(true);
-          console.log("from mail");
+    useEffect(() => {
+      if (props.value) {
+        setMail((prevMail) => ({
+          ...prevMail,
+          to: props.value.to || "",
+          subject: props.value.subject || "",
+          content: props.value.content || "",
+        }));
+    
+        if (props.setClicked) {
+          // Assuming setClicked is a function that sets a boolean value
+          const sendButton = document.getElementById("send");
+          if (sendButton) {
+            const handleClick = () => {
+              props.setClicked(true);
+              console.log("from mail");
+            };
+    
+            sendButton.addEventListener("click", handleClick);
+    
+            return () => {
+              // Cleanup: Remove the event listener when the component unmounts
+              sendButton.removeEventListener("click", handleClick);
+            };
+          }
         }
       }
-     }
-    },[])
+    }, [props.value, props.setClicked]);
+    
 return (
     <Box
       component="form"

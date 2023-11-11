@@ -31,8 +31,8 @@ export const emailSlice=createSlice({
     // If the message is found, filter it out and return a new state object
   if (state.send.some((message)=>message._id==action.payload)) {
     const updatedSend = state.send.filter((message) => message._id !== action.payload);
-    const updatedStarred = state.starred?.filter((message) => message._id !== action.payload);
-    const updatedImportant = state.important?.filter((message) => message._id !== action.payload);
+    const updatedStarred = (state.starred ?? []).filter((message) => message._id !== action.payload);
+    const updatedImportant = (state.important ?? []).filter((message) => message._id !== action.payload);
     return {
       ...state,
       send: updatedSend,
@@ -41,8 +41,8 @@ export const emailSlice=createSlice({
     };
   }else if(state.inbox.some((message)=>message._id==action.payload)){
     const updatedInbox = state.inbox.filter((message) => message._id !== action.payload);
-    const updatedStarred = state.starred?.filter((message) => message._id !== action.payload);
-    const updatedImportant = state.important?.filter((message) => message._id !== action.payload);
+    const updatedStarred =(state.starred ?? []).filter((message) => message._id !== action.payload);
+    const updatedImportant = (state.important ?? []).filter((message) => message._id !== action.payload);
     return {
       ...state,
       inbox: updatedInbox,
@@ -52,8 +52,8 @@ export const emailSlice=createSlice({
 
   }else if(state.draft.some((message)=>message._id==action.payload)){
     const updatedDraft = state.draft.filter((message) => message._id !== action.payload);
-    const updatedStarred = state.starred.filter((message) => message._id !== action.payload);
-    const updatedImportant = state.important.filter((message) => message._id !== action.payload);
+    const updatedStarred = (state.starred ?? []).filter((message) => message._id !== action.payload);
+    const updatedImportant = (state.important ?? []).filter((message) => message._id !== action.payload);
     return {
       ...state,
       draft: updatedDraft,
