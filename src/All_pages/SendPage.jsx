@@ -13,35 +13,35 @@ import { setSend,setDelete, setStartoggler, setImportanttoggler } from '../compo
 
 function SendPage() {
    
-const state=useSelector((state)=>state.email);
-const {send}=state;
-const token=localStorage.getItem('token');
-const dispatch=useDispatch();
-const navigate=useNavigate();
+  const state=useSelector((state)=>state.email);
+  const {send}=state;
+  const token=localStorage.getItem('token');
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
 
-const getSendMail=useApi(API_URLS.getOutboxMsg);
-const toggler=useApi(API_URLS.markStarredMsg);
-const mailDelete=useApi(API_URLS.deleteMsg);
-const ImportantLabel=useApi(API_URLS.markImportantMsg);
+   //calling end point from central url
+  const getSendMail=useApi(API_URLS.getOutboxMsg);
+  const toggler=useApi(API_URLS.markStarredMsg);
+  const mailDelete=useApi(API_URLS.deleteMsg);
+  const ImportantLabel=useApi(API_URLS.markImportantMsg);
 
   const fetchdata=async()=>{  
     try{
     const res=await getSendMail.call({},token);
       if(res.status){
-        console.log(res)
-      const data=res.data.message;
-      dispatch(setSend(data));
+        const data=res.data.message;
+        dispatch(setSend(data));
      }
    }catch (error){
     console.log(error);
    }
  }
- useEffect(()=>{
-  fetchdata();
+  useEffect(()=>{
+   fetchdata();
   },[]);
 
-const handleClick=(event)=>{
-let msgId=event.target.id;
+  const handleClick=(event)=>{
+  let msgId=event.target.id;
     if(msgId){
        navigate(`/outbox/${msgId}`)
     }else{
@@ -50,39 +50,33 @@ let msgId=event.target.id;
   }
 }
 
+//function for marking as starred
 const toggleStarredMail=async(e)=>{
   try {
     const msgId=e.target.closest('.row').children[1].id;
-    console.log(msgId);
     const params=msgId
-    console.log(token,"jwt");
-    dispatch(setStartoggler(params));
-    console.log(...send);
+    dispatch(setStartoggler(params)); 
     let res=await toggler.call({},token,params);
-    console.log(res);  
+
     } catch (error) {
     console.log(error); 
   }
 }
 
+//function for delete
 const handleDelete=async(event)=>{
   try {
-  
     let msgId=event.target.closest('.row').children[1].id;
     const params=msgId;
-
     dispatch(setDelete(msgId));
-    console.log(params)
     const res= await mailDelete.call({},token,params);
-    console.log(res);
-      if(res.status){
-       const update=await getSendMail.call({},token);
-      if(update.status){
-       const data = update.data.message;
-       console.log(data);
 
-        dispatch(setSend(data));
-        console.log(data)
+    if(res.status){
+        const update=await getSendMail.call({},token);
+  
+        if(update.status){
+         const data = update.data.message;
+         dispatch(setSend(data));
        }
      } 
    } catch (error) {
@@ -90,63 +84,55 @@ const handleDelete=async(event)=>{
     } 
   }
 
-  const toggleImportantMail=async(e)=>{
+  //function for marking as important
+ const toggleImportantMail=async(e)=>{
     try {
       const msgId=e.target.closest('.row').children[1].id;
-    console.log(msgId);
-    const params=msgId  
-      console.log(token,"jwt");
+      const params=msgId  
       dispatch(setImportanttoggler(params));
-      console.log(...send);
       let res=await ImportantLabel.call({},token,params);
-      console.log(res);
+  
       } catch (error) {
         console.log(error);     
     }  
   }
-  
 return (
   <Layout>
      <MailContainer>
        {send?.map((msg)=>(
-        <Row key={msg._id} className='row' onClick={handleClick}>
-         <Icons>
-         <IconButton>
+         <Row key={msg._id} className='row' onClick={handleClick}>
+          <Icons>
+           <IconButton>
             <Checkbox size='small'/>
-         </IconButton>
-          {msg.starred?(
-          <IconButton
-          onClick={ toggleStarredMail}
-          ><Star
-          fontSize="small"
-          style={{  color: "#FADA5E" }} />
-
-         </IconButton>
-         ) : (
-        <IconButton  onClick={toggleStarredMail}>
-        <StarBorder fontSize="small"/>
-        </IconButton>
-     )}  
-      {msg.important?(
-     <IconButton onClick={toggleImportantMail}>
-      <LabelImportantIcon
-      style={{  color: "#FADA5E" }} />
-   </IconButton>   
-    ):(
-   <IconButton onClick={toggleImportantMail}>
-    <LabelImportantOutlinedIcon/>
-   </IconButton>
-   )
-  }
-   </Icons>
-      <Message id={msg._id} >
-        <div >{msg.sender_name||msg.receiver_name}</div>
-        <div>{msg.subject}</div>
-        <div>{msg.date.slice(0,10)}</div>
-        <div>
-          <IconButton onClick={handleDelete} className='delete'>
-           <DeleteIcon/>
-          </IconButton>
+             </IconButton>
+              {msg.starred?(
+               <IconButton  onClick={ toggleStarredMail}
+                ><Star className='Star'/>
+                 </IconButton>
+                     ) : (
+                    <IconButton  onClick={toggleStarredMail}>
+                      <StarBorder fontSize="small"/>
+                        </IconButton>
+                         )}  
+                          {msg.important?(
+                            <IconButton onClick={toggleImportantMail}>
+                              <LabelImportantIcon className='Star'/>
+                             </IconButton>   
+                             ):(
+                            <IconButton onClick={toggleImportantMail}>
+                          <LabelImportantOutlinedIcon/>
+                        </IconButton>
+                        )
+                      }
+                     </Icons>
+                     <Message id={msg._id} >
+                   <div >{msg.sender_name||msg.receiver_name}</div>
+                  <div>{msg.subject}</div>
+                <div>{msg.date.slice(0,10)}</div>
+              <div>
+              <IconButton onClick={handleDelete} className='delete'>
+            <DeleteIcon/>
+           </IconButton>
           </div>
        </Message>
       </Row>         
@@ -162,7 +148,7 @@ export const MailContainer=styled(Box)({
    display:'flex',
    flexDirection:'column',
    justifyContent:'flex-start',
- });
+ }); 
 
 export const Row=styled(Box)({
    display:'grid',

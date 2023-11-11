@@ -33,16 +33,13 @@ const uploadFile=async(e)=>{
     data.set("sample_file", file);
 
     try {
-    const res=await file_load.call(data,token);
-    console.log(res);
-    console.log(res.data.url);
-    document.getElementById('file-name').setAttribute('href',res.data.url);
-    setMail({...mail,attachments:`${res.data.url}`});
-    console.log({...mail});
+      const res=await file_load.call(data,token);
+      document.getElementById('file-name').setAttribute('href',res.data.url);
+      setMail({...mail,attachments:`${res.data.url}`});
     } catch (error) {
       console.log(error);
     }    
-    }
+  }
     
     const handleSelectFile = (e) =>{
       setFile(e.target.files[0]);
@@ -50,7 +47,6 @@ const uploadFile=async(e)=>{
 
     const handleChange=(e)=>{
        setMail({...mail,[e.target.name]:e.target.value});
-       console.log(mail)
        props.setdatafromChild({ ...mail });
     }
 
@@ -60,8 +56,6 @@ const uploadFile=async(e)=>{
       props.handlex();
       try {
         const res= await mail_send.call(mail,token);
-        console.log(res);
-        console.log("from send")
       } catch (error) {
         console.log(error);
       }
@@ -76,7 +70,6 @@ const uploadFile=async(e)=>{
       if(props.setClicked){
         document.getElementById('send').onclick=function(){
         props.setClicked(true);
-        console.log("from mail");
         }
       }   
       }        

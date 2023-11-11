@@ -24,20 +24,19 @@ export default function Forget() {
   const handleSubmit = async(event) => {
     event.preventDefault(); 
     try {
-    const res=await  getForget.call(email,'')
-    event.target.reset();
+      const res=await  getForget.call(email,'')
+      event.target.reset();
 
-  //  console.log("password reset mail sent");
-   } catch (error) {
-    console.log(error);
-   }
-};
+     } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handlechange=(e)=>{
     e.preventDefault();
     setEmail({...email,[e.target.name]: e.target.value });
-}
-  return (
+  }
+return (
     <ThemeProvider theme={defaultTheme}>
       <Container className="imgforget">
       <img src='http://surl.li/nbdpx'/>
@@ -49,43 +48,43 @@ export default function Forget() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}>
+             }}>
 
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Forget Password
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={handlechange} />
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOutlinedIcon />
+                  </Avatar>
+                   <Typography component="h1" variant="h5">
+                       Forget Password
+                         </Typography>
+                           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                            <TextField
+                              margin="normal"
+                              required
+                              fullWidth
+                              id="email"
+                              label="Email Address"
+                              name="email"
+                              autoComplete="email"
+                              autoFocus
+                              onChange={handlechange} />
                 
-              <Typography color={'red'}>
-                Enter Registered Email 
-              </Typography>     
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}>Send</Button>
+                            <Typography color={'red'}>
+                             Enter Registered Email 
+                          </Typography>     
+                        <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}>Send</Button>
 
-            <Grid container>
-              <Grid item xs>
-                <Link href="/" variant="body2">
-                   Go  to Login Page
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
+                        <Grid container>
+                        <Grid item xs>
+                       <Link href="/" variant="body2">
+                        Go  to Login Page
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                   <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

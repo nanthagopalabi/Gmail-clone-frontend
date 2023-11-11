@@ -36,51 +36,48 @@ return (
     <StyledToolbar>
       <LogoWrapper>
         <MenuIcon color="action" onClick={toggleDrawer} cursor="pointer"/>
-          <img
-            src='https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png'
-            alt="logo"
-            style={{ width: "70%", marginLeft:10 }}/>
-      </LogoWrapper>
-        <SearchRapper>
-          <SearchRoundedIcon color="action"/>
-          <InputBase placeholder="Search mail" />
-          <Tune color="action" />
-        </SearchRapper>
-        <IconsWrapper>
-          <Icon>
-            <IconButton>
-             <HelpOutlineOutlined/>
-            </IconButton>
-            <IconButton>
-              <SettingsOutlined />
-            </IconButton>
-            <IconButton>
-              <AppsOutlined />
-            </IconButton>
-            <Box sx={{ flexGrow: 0 }}>
+          <img src='https://shorturl.at/mrvxP' alt="logo"
+             style={{ width: "70%", marginLeft:10 }}/>
+              </LogoWrapper>
+               <SearchRapper>
+                <SearchRoundedIcon color="action"/>
+                  <InputBase placeholder="Search mail"/>
+                   <Tune color="action"/>
+                    </SearchRapper>
+                      <IconsWrapper>
+                       <Icon>
+                         <IconButton>
+                           <HelpOutlineOutlined/>
+                             </IconButton>
+                             <IconButton>
+                        <SettingsOutlined />
+                       </IconButton>
+                       <IconButton>
+                     <AppsOutlined />
+                    </IconButton>
+                   <Box sx={{ flexGrow: 0 }}>
             
-              <IconButton onClick={handleOpenUserMenu}>
+                  <IconButton onClick={handleOpenUserMenu}>
                 <AccountCircleOutlined/>
-              </IconButton>
+               </IconButton>
             
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={logout}>
+               <Menu
+                 sx={{ mt: '45px' }}
+                 id="menu-appbar"
+                 anchorEl={anchorElUser}
+                 anchorOrigin={{
+                 vertical: 'top',
+                 horizontal: 'right',
+                 }}
+                 keepMounted
+                 transformOrigin={{
+                 vertical: 'top',
+                 horizontal: 'right',
+                 }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}>
+                  {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={logout}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

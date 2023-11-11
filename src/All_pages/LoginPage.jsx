@@ -24,7 +24,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="http://surl.li/nbkrc">
         Nanthagopal
       </Link>{' '}
       {new Date().getFullYear()}
@@ -43,10 +43,10 @@ export default function SignIn() {
         email:""
         ,password:""});
 
-  //calling end point from global url
+  //calling end point from central url
   const getlogin=useApi(API_URLS.userLogin);
 
-  //function to handle login
+  //function for login
   const handleSubmit =async(event) => {
     event.preventDefault();
     try {
@@ -65,75 +65,71 @@ export default function SignIn() {
     const handlechange=(e)=>{
         e.preventDefault();
         setUser({...user,[e.target.name]: e.target.value });
-        console.log(user);
     }
 
-  return (
+return (
     <ThemeProvider theme={defaultTheme}>
       <Container className="mainContainer">
-      <img src='http://surl.li/nbcag'/>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 3,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}>
-            <img className='mailLogo' src='http://surl.li/ltcth'/>
+        <img className="imgLogin" src='http://surl.li/nbcag'/>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+              <Box
+              sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              }}>
+               <img className='mailLogo' src='http://surl.li/ltcth'/>
         
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" id='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={handlechange}/>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={handlechange}/>
-
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"/>
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}>Sign In</Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="forget" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                  <LockOutlinedIcon />
+                   </Avatar>
+                   <Typography component="h1" variant="h5">
+                     Sign in
+                    </Typography>
+                    <Box component="form" id='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                     <TextField
+                     margin="normal"
+                     required
+                     fullWidth
+                     id="email"
+                     label="Email Address"
+                     name="email"
+                     autoComplete="email"
+                     autoFocus
+                     onChange={handlechange}/>
+                     <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      onChange={handlechange}/>
+                      <FormControlLabel
+                       control={<Checkbox value="remember" color="primary" />}
+                       label="Remember me"/>
+                        <Button
+                         type="submit"
+                         fullWidth
+                         variant="contained"
+                         sx={{ mt: 3, mb: 2 }}>Sign In</Button>
+                         <Grid container>
+                         <Grid item xs>
+                         <Link href="forget" variant="body2">
+                         Forgot password?
+                      </Link>
+                     </Grid>
+                   <Grid item>
+                  <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
-        </Box>
+         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
       </Container>

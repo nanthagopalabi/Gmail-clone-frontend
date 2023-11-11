@@ -20,7 +20,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="http://surl.li/nbkrc">
         Nanthagopal
       </Link>{' '}
       {new Date().getFullYear()}
@@ -52,12 +52,11 @@ const validationSchema = yup.object({
 export default function SignUp() {
 const navigate = useNavigate();
 
-//calling end point from global url
+//calling end point from central url
 const createRegister=useApi(API_URLS.createUser);
 const handleSubmit = async() => {   
    try {
     const res = await createRegister.call(formik.values,'');
-    console.log("Registration successful");
     if(res.status){
       navigate('/');
       return 
@@ -83,23 +82,23 @@ const formik = useFormik({
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container className='imgRegister'>
-      <img src='http://surl.li/nbdct'/>
-      <Container component="main"maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
+       <img src='http://surl.li/nbdct'/>
+        <Container component="main"maxWidth="xs">
+         <CssBaseline />
+          <Box
+            sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}>
-          <img className='imgGoogle'src='http://surl.li/dgqoq'/>
-          <Typography component="h1" variant="h5">
-          Create a Google Account
-          </Typography>
-          <Box component="form" noValidate onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} >
-                <TextField
+           }}>
+            <img className='imgGoogle'src='http://surl.li/dgqoq'/>
+             <Typography component="h1" variant="h6">
+               Create a Google Account
+              </Typography>
+              <Box component="form" noValidate onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} >
+                    <TextField
                   autoComplete="given-name"
                   name="name"
                   required
@@ -112,50 +111,50 @@ const formik = useFormik({
                   onBlur={formik.handleBlur}
                  error={formik.touched.name && Boolean(formik.errors.name)}
                  helperText={formik.touched.name && formik.errors.name}/>
-           </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.name && Boolean(formik.errors.name)}
-                  helperText={formik.touched.name && formik.errors.name}/>
-           </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.password && Boolean(formik.errors.password)}
-                  helperText={formik.touched.password && formik.errors.password}/>
-            </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I Accepts terms and conditions."/>
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}>Sign Up </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/" variant="body2">
+                  </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={formik.touched.name && Boolean(formik.errors.name)}
+                      helperText={formik.touched.name && formik.errors.name}/>
+                      </Grid>
+                           <Grid item xs={12}>
+                             <TextField
+                              required
+                              fullWidth
+                              name="password"
+                              label="Password"
+                              type="password"
+                              id="password"
+                              autoComplete="new-password"
+                              value={formik.values.password}
+                              onChange={formik.handleChange}
+                              onBlur={formik.handleBlur}
+                              error={formik.touched.password && Boolean(formik.errors.password)}
+                              helperText={formik.touched.password && formik.errors.password}/>
+                             </Grid>
+                            <Grid item xs={12}>
+                           <FormControlLabel
+                           control={<Checkbox value="allowExtraEmails" color="primary" />}
+                          label="I Accepts terms and conditions."/>
+                          </Grid>
+                         </Grid>
+                        <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                       sx={{ mt: 3, mb: 2 }}>Sign Up </Button>
+                     <Grid container justifyContent="flex-end">
+                    <Grid item>
+                  <Link href="/" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

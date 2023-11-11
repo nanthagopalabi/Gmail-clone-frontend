@@ -22,10 +22,9 @@ export function Reset() {
 const naviagte=useNavigate();
 const [reset,setReset]=useState({password:''});
 const {resetToken}=useParams(); 
-
 const getReset = useApi(API_URLS.resetPass);
 
-  console.log(resetToken);
+//function for submit email
   const handleSubmit = async(event) => {
     event.preventDefault();
     event.target.reset();
@@ -43,8 +42,7 @@ const getReset = useApi(API_URLS.resetPass);
   const handlechange=(e)=>{
     e.preventDefault();
     setReset({...reset,[e.target.name]: e.target.value });
-  console.log(reset);
- }
+  }
 
 return (
     <ThemeProvider theme={defaultTheme}>
@@ -59,37 +57,37 @@ return (
           }}>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Reset Password
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Enter new Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={handlechange} />
+             </Avatar>
+              <Typography component="h1" variant="h5">
+               Reset Password
+                </Typography>
+               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                  <TextField
+                   margin="normal"
+                   required
+                   fullWidth
+                   name="password"
+                   label="Enter new Password"
+                   type="password"
+                   id="password"
+                   autoComplete="current-password"
+                   onChange={handlechange} />
                        
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >Save new Password
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/" variant="body2">
-                  Login
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  >Save new Password
+                   </Button>
+                    <Grid container>
+                      <Grid item xs>
+                       <Link href="/" variant="body2">
+                         Login
+                      </Link>
+                     </Grid>
+                    <Grid item>
+                    <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

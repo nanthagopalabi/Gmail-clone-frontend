@@ -19,38 +19,40 @@ function Layout({children}) {
   
 return (
    <>
-     <LayoutWrapper >
+    <LayoutWrapper >
       <Header toggleDrawer={toggleDrawer} />   
-      <Main>
-      <LeftIconBarWrapper>
-        <Sidebar openDrawer={openDrawer}/>
-      </LeftIconBarWrapper>
-      <MainBodyWrapper style={openDrawer?{marginLeft:250,paddingLeft:0}:{width:"100%"}} >
-      <EmailTopBar>
-          <MailHeader/>
-         </EmailTopBar>
-        <TabBar>
-          <TabBarItems>
-            <div>
-              <div><InboxIcon/></div>
-                Primary
-               </div>  
-                <div>
-                  <div><LocalOfferOutlinedIcon/></div>
-                    Promotion
-                   </div>
-                     <div>
-                      <div><GroupOutlinedIcon/></div>
-                       Social</div>
-                        <div>
-                         <div><InfoOutlinedIcon/></div>
-                          Updates</div>
-                         </TabBarItems>
-                         </TabBar>
-                      <MailContainer >
-                    {children}
-                  </MailContainer>
-                </MainBodyWrapper>
+       <Main>
+        <LeftIconBarWrapper>
+          <Sidebar openDrawer={openDrawer}/>
+           </LeftIconBarWrapper>
+             <MainBodyWrapper style={openDrawer?{marginLeft:250,paddingLeft:0}:{width:"100%"}} >
+              <EmailTopBar>
+               <MailHeader/>
+                 </EmailTopBar>
+                  <TabBar>
+                   <TabBarItems>
+                   <div>
+                     <div><InboxIcon/></div>
+                       Primary
+                   </div>  
+                      <div>
+                        <div><LocalOfferOutlinedIcon/></div>
+                        Promotion
+                      </div>
+                         <div>
+                          <div><GroupOutlinedIcon/></div>
+                           Social
+                          </div>
+                            <div>
+                             <div><InfoOutlinedIcon/></div>
+                              Updates
+                             </div>
+                          </TabBarItems>
+                        </TabBar>
+                     <MailContainer >
+                   {children}
+                </MailContainer>
+              </MainBodyWrapper>
             <RigthSideIconBar>
          <RightSideIcon/>
       </RigthSideIconBar>

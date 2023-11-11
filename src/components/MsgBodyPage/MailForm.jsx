@@ -34,27 +34,24 @@ const mail_send=useApi(API_URLS.composeNew);
 
     try {
      const res= await file_load.call(data,token);
-     console.log(res);
-     console.log(res.data.url);
      document.getElementById('file-name').setAttribute('href',res.data.url);
      setMail({...mail,attachments:`${res.data.url}`});
-     console.log({...mail});
+
      } catch (error) {
       console.log(error);
      }
    }
     
   //function to handle file selection
-  const handleSelectFile = (e) =>{
-  setFile(e.target.files[0]);
-  }
+    const handleSelectFile = (e) =>{
+    setFile(e.target.files[0]);
+   }
 
   //function to handle to mail details
-  const handleChange=(e)=>{
-  setMail({...mail,[e.target.name]:e.target.value});
-  props.setdatafromChild({ ...mail, [e.target.name]: e.target.value });
-  console.log(mail);
-  }
+    const handleChange=(e)=>{
+    setMail({...mail,[e.target.name]:e.target.value});
+    props.setdatafromChild({ ...mail, [e.target.name]: e.target.value });
+   }
 
   //function to send mail
     const handleSend=async(e)=>{
@@ -62,15 +59,15 @@ const mail_send=useApi(API_URLS.composeNew);
       e.preventDefault();
 
       try {
-        console.log("Sending mail:", mail);
         props.setdatafromChild(mail);
         const res= await mail_send.call(mail,token);
-        console.log(res);
+
       } catch (error) {        
         console.log(error);
       }
       props.handlex();
     }
+
     useEffect(() => {
       if (props.value) {
         setMail((prevMail) => ({
@@ -81,16 +78,14 @@ const mail_send=useApi(API_URLS.composeNew);
         }));
     
         if (props.setClicked) {
-          // Assuming setClicked is a function that sets a boolean value
+          // Assuming setClicked  sets a boolean value
           const sendButton = document.getElementById("send");
           if (sendButton) {
             const handleClick = () => {
               props.setClicked(true);
-              console.log("from mail");
             };
     
             sendButton.addEventListener("click", handleClick);
-    
             return () => {
               // Cleanup: Remove the event listener when the component unmounts
               sendButton.removeEventListener("click", handleClick);

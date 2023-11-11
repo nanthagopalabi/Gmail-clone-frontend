@@ -27,10 +27,8 @@ export default function CustomizedDialogs(props) {
   const saveDraft = async(mail)=>{ 
     try {
       const token=localStorage.getItem('token');
-      console.log(token, mail)
-
       const res = await Save.call({...mail},token);
-      console.log(res);
+
        if(res.status){
         console.log(res)
        }
@@ -40,10 +38,8 @@ export default function CustomizedDialogs(props) {
   }
   const check=()=>{
     handlex();
-    console.log(datafromChild)
     saveDraft(datafromChild);
   }
-
 return (
     <div >
       <BootstrapDialog

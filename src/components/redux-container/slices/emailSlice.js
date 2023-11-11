@@ -6,43 +6,42 @@ export const emailSlice=createSlice({
     initialState:{user:{
         token:localStorage.getItem('token')||null,
         email:null
-    },inbox:[],send:[],draft:[],trash:[],starred:[],important:[]},
+       },inbox:[],send:[],draft:[],trash:[],starred:[],important:[]},
     reducers:{
         
-     setToken:(state,action)=>{
+    setToken:(state,action)=>{
         state.user.token=action.payload;
-        console.log(action.payload);
         return
       },
-     setInbox:(state,action)=>{
+    setInbox:(state,action)=>{
         action.payload?.forEach(element => {
         state.inbox.every((msg)=>element?._id!==msg?._id) ? state.inbox.push(element):null
        });
      },
-     setSend:(state,action)=>{
+    setSend:(state,action)=>{
         action.payload.forEach(element => {
         state.send.every((msg)=>element?._id!==msg._id) ? state.send.push(element):null 
        });
       },
 
-   //Delete functionality
-     setDelete:(state,action)=>{
+  
+    setDelete:(state,action)=>{
     
-    // If the message is found, filter it out and return a new state object
-  if (state.send.some((message)=>message._id==action.payload)) {
-    const updatedSend = state.send.filter((message) => message._id !== action.payload);
-    const updatedStarred = (state.starred ?? []).filter((message) => message._id !== action.payload);
-    const updatedImportant = (state.important ?? []).filter((message) => message._id !== action.payload);
+  // If the message is found, filter it out and return a new state object
+  if (state.send.some((msg)=>msg._id==action.payload)) {
+    const updatedSend = state.send.filter((msg) => msg._id !== action.payload);
+    const updatedStarred = (state.starred ?? []).filter((msg) => msg._id !== action.payload);
+    const updatedImportant = (state.important ?? []).filter((msg) => msg._id !== action.payload);
     return {
       ...state,
       send: updatedSend,
       starred:updatedStarred,
       important:updatedImportant
     };
-  }else if(state.inbox.some((message)=>message._id==action.payload)){
-    const updatedInbox = state.inbox.filter((message) => message._id !== action.payload);
-    const updatedStarred =(state.starred ?? []).filter((message) => message._id !== action.payload);
-    const updatedImportant = (state.important ?? []).filter((message) => message._id !== action.payload);
+  }else if(state.inbox.some((msg)=>msg._id==action.payload)){
+    const updatedInbox = state.inbox.filter((msg) => msg._id !== action.payload);
+    const updatedStarred =(state.starred ?? []).filter((msg) => msg._id !== action.payload);
+    const updatedImportant = (state.important ?? []).filter((msg) => msg._id !== action.payload);
     return {
       ...state,
       inbox: updatedInbox,
@@ -50,23 +49,19 @@ export const emailSlice=createSlice({
       important:updatedImportant
     };
 
-  }else if(state.draft.some((message)=>message._id==action.payload)){
-    const updatedDraft = state.draft.filter((message) => message._id !== action.payload);
-    const updatedStarred = (state.starred ?? []).filter((message) => message._id !== action.payload);
-    const updatedImportant = (state.important ?? []).filter((message) => message._id !== action.payload);
+  }else if(state.draft.some((msg)=>msg._id==action.payload)){
+    const updatedDraft = state.draft.filter((msg) => msg._id !== action.payload);
+    const updatedStarred = (state.starred ?? []).filter((msg) => msg._id !== action.payload);
+    const updatedImportant = (state.important ?? []).filter((msg) => msg._id !== action.payload);
     return {
       ...state,
       draft: updatedDraft,
       starred:updatedStarred,
       important:updatedImportant
     };
-   }else if(state.trash.some((message)=>message._id==action.payload)){
-    const updatedTrash = state.trash.filter((message) => message._id !== action.payload);
-    return {
-      ...state,
-       trash:updatedTrash
-    }
-
+   }else if(state.trash.some((msg)=>msg._id==action.payload)){
+    const updatedTrash = state.trash.filter((msg) => msg._id !== action.payload);
+    return {...state,trash:updatedTrash}
   }
    // If the message is not found, return the unchanged state
    return state;
@@ -96,57 +91,57 @@ export const emailSlice=createSlice({
 
      setStartoggler:(state,action)=>{
         
-      if (state.send.some((message)=>message._id==action.payload)) {
-        const updatedSend = state.send.map(message => {
-          if (message._id === action.payload) {
+      if (state.send.some((msg)=>msg._id==action.payload)) {
+        const updatedSend = state.send.map(msg => {
+          if (msg._id === action.payload) {
             // Toggle the starred property for the matching message
-            return { ...message, starred: !message.starred };
+            return { ...msg, starred: !msg.starred };
           }
-          return message; 
+          return msg; 
         });
-        const updatedStarred = state.starred?.map(message => {
-          if (message._id === action.payload) {
+        const updatedStarred = state.starred?.map(msg => {
+          if (msg._id === action.payload) {
             // Toggle the starred property for the matching message
-            return { ...message, starred: !message.starred };
+            return { ...msg, starred: !msg.starred };
           }
-          return message; 
+          return msg; 
         });
        
         // Return a new state object with the updated 'send' array
         return { ...state, send: updatedSend,starred:updatedStarred,};
 
-      }else if(state.inbox.some((message)=>message._id==action.payload)){
-        const updatedInbox = state.inbox.map(message => {
-          if (message._id === action.payload) {
+      }else if(state.inbox.some((msg)=>msg._id==action.payload)){
+        const updatedInbox = state.inbox.map(msg => {
+          if (msg._id === action.payload) {
             // Toggle the starred property for the matching message
-            return { ...message, starred: !message.starred };
+            return { ...msg, starred: !msg.starred };
           }
-          return message; 
+          return msg; 
         });
-        const updatedStarred = state.starred?.map(message => {
-          if (message._id === action.payload) {
+        const updatedStarred = state.starred?.map(msg => {
+          if (msg._id === action.payload) {
             // Toggle the starred property for the matching message
-            return { ...message, starred: !message.starred };
+            return { ...msg, starred: !msg.starred };
           }
-          return message;
+          return msg;
         });
        
         return { ...state, inbox: updatedInbox ,starred:updatedStarred};
     
-      }else if(state.draft.some((message)=>message._id==action.payload)){
-        const updatedDraft = state.draft.map(message => {
-          if (message._id === action.payload) {
+      }else if(state.draft.some((msg)=>msg._id==action.payload)){
+        const updatedDraft = state.draft.map(msg => {
+          if (msg._id === action.payload) {
             // Toggle the starred property for the matching message
-            return { ...message, starred: !message.starred };
+            return { ...msg, starred: !msg.starred };
           }
-          return message; 
+          return msg; 
         });
-        const updatedStarred = state.starred.map(message => {
-          if (message._id === action.payload) {
+        const updatedStarred = state.starred.map(msg => {
+          if (msg._id === action.payload) {
             // Toggle the starred property for the matching message
-            return { ...message, starred: !message.starred };
+            return { ...msg, starred: !msg.starred };
           }
-          return message; 
+          return msg; 
         });
         return { ...state, draft: updatedDraft,starred:updatedStarred }    
       }
@@ -155,61 +150,61 @@ export const emailSlice=createSlice({
       return state;
            },
     
-           setImportanttoggler:(state,action)=>{
+    setImportanttoggler:(state,action)=>{
     
-        if (state.send.some((message)=>message._id==action.payload)) {
-              const updatedSend = state.send.map(message => {
-                if (message._id === action.payload) {
+        if (state.send.some((msg)=>msg._id==action.payload)) {
+              const updatedSend = state.send.map(msg => {
+                if (msg._id === action.payload) {
                   // Toggle the starred property for the matching message
-                  return { ...message, important: !message.important };
+                  return { ...msg, important: !msg.important };
                 }
-                return message;
+                return msg;
               }); 
               
-            const updatedImportant = state.important?.map(message => {
-                if (message._id === action.payload) {
+            const updatedImportant = state.important?.map(msg => {
+                if (msg._id === action.payload) {
                   // Toggle the starred property for the matching message
-                  return { ...message, important: !message.important };
+                  return { ...msg, important: !msg.important };
                 }
-                return message;
+                return msg;
               });
 
             // Return a new state object with the updated 
               return { ...state,send:updatedSend,important:updatedImportant };
             
-            }else if(state.inbox.some((message)=>message._id==action.payload)){
-              const updatedInbox = state.inbox.map(message => {
-                if (message._id === action.payload) {
+            }else if(state.inbox.some((msg)=>msg._id==action.payload)){
+              const updatedInbox = state.inbox.map(msg => {
+                if (msg._id === action.payload) {
                   // Toggle the starred property for the matching message
-                  return { ...message, important: !message.important };
+                  return { ...msg, important: !msg.important };
                 }
-                return message; 
+                return msg; 
               });
               
-              const updatedImportant = state.important?.map(message => {
-                if (message._id === action.payload) {
+              const updatedImportant = state.important?.map(msg => {
+                if (msg._id === action.payload) {
                   // Toggle the starred property for the matching message
-                  return { ...message, important: !message.important };
+                  return { ...msg, important: !msg.important };
                 }
-                return message; 
+                return msg; 
               });
               return { ...state, inbox: updatedInbox,important:updatedImportant};
           
-            }else if(state.draft.some((message)=>message._id==action.payload)){
-              const updatedDraft = state.draft.map(message => {
-                if (message._id === action.payload) {
+            }else if(state.draft.some((msg)=>msg._id==action.payload)){
+              const updatedDraft = state.draft.map(msg => {
+                if (msg._id === action.payload) {
                   // Toggle the starred property for the matching message
-                  return { ...message, important: !message.important };
+                  return { ...msg, important: !msg.important };
                 }
-                return message; 
+                return msg; 
               });
              
-              const updatedImportant = state.important?.map(message => {
-                if (message._id === action.payload) {
+              const updatedImportant = state.important?.map(msg => {
+                if (msg._id === action.payload) {
                   // Toggle the starred property for the matching message
-                  return { ...message, important: !message.important };
+                  return { ...msg, important: !msg.important };
                 }
-                return message;
+                return msg;
               });
 
               return { ...state, draft:updatedDraft,important:updatedImportant};

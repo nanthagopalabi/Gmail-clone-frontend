@@ -1,28 +1,44 @@
 .mainContainer{
-    display:flex !important; 
+    display:flex !important;
+    max-width: 100%;
+    height:480px;
+    flex-wrap: nowrap;
+}
+
+.imgLogin{
+    display: flex;
+    height: 600px;
 }
 
 .mailLogo{
-    width: 330px;
-    height: 180px;
+    width: 230px;
+    height: 110px;
     display: grid;
 }
+
 .imgforget{
     display: flex !important;
     height:600px;
     margin-right: 80px;
-} 
+}
+
 .imgRegister{
     display: flex !important;
+    height: 600px;
 }
 
 .imgGoogle{
-    width: 240px;
-    height: 140px;
+    width: 140px;
+    height: 65px;
 }
+
 .imgError{
     display: flex;
     max-width: 100%;
     max-height: 100%;
     height: auto;    
+}
+.Star{
+    font-size:small;
+    color: #FADA5E;
 }
