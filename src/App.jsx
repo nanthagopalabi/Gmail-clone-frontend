@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignUp from './All_pages/RegisterPage';
 import SignIn from './All_pages/LoginPage';
 import Inbox from './All_pages/Inbox';
@@ -30,8 +30,8 @@ function App() {
           <Route path='/forget' Component={Forget}/>
           <Route path='/reset/:token' Component={Reset}/>
           <Route path='/drafts' Component={DraftPage}/>
-          <Route  path='/starred' Component={StarredPage} />
-          <Route  path='/important' Component={Important} />
+          <Route path='/starred' Component={StarredPage} />
+          <Route path='/important' Component={Important} />
           <Route path='/trash' Component={Trash}/>
           <Route path='*' Component={ErrorPage}/>
         </Routes>
