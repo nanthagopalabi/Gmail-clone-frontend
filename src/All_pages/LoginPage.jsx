@@ -38,7 +38,7 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
     const dispatch = useDispatch();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const[user,setUser]=useState({
         email:""
         ,password:""});

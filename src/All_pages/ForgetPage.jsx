@@ -38,7 +38,7 @@ export default function Forget() {
   }
 return (
     <ThemeProvider theme={defaultTheme}>
-      <Container className="imgforget">
+      <Container className="imgRegister">
       <img src='http://surl.li/nbdpx'/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
