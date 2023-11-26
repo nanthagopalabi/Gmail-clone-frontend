@@ -70,7 +70,7 @@ export default function SignIn() {
 return (
     <ThemeProvider theme={defaultTheme}>
       <Container className="mainContainer">
-        <img className="imgLogin" src='http://surl.li/nbcag'/>
+        <img className="imgLogin" src='https://img.freepik.com/free-vector/contact-concept-landing-page_52683-21299.jpg?w=740&t=st=1699677273~exp=1699677873~hmac=aacf9bd4c11f779dab69240518493df00bc4aa00923cc92ce604c1f734ed802f'/>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
               <Box
@@ -79,7 +79,7 @@ return (
               flexDirection: 'column',
               alignItems: 'center',
               }}>
-               <img className='mailLogo' src='http://surl.li/ltcth'/>
+               <img className='mailLogo' src='https://1000logos.net/wp-content/uploads/2021/05/Gmail-logo.png'/>
         
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                   <LockOutlinedIcon />
