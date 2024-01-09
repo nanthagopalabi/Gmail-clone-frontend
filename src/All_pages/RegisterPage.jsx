@@ -20,7 +20,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="http://surl.li/nbkrc">
+      <Link color="inherit" href="www.linkedin.com/in/nantha-gopal-94026b9b">
         Nanthagopal
       </Link>{' '}
       {new Date().getFullYear()}
@@ -82,7 +82,7 @@ const formik = useFormik({
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container className='imgRegister'>
-       <img src='http://surl.li/nbdct'/>
+       <img src='https://img.freepik.com/free-vector/forms-concept-illustration_114360-8290.jpg?w=740&t=st=1699683644~exp=1699684244~hmac=ba62be3722cf2402d2ab40eb1369ce5e3bc01002e850d7f6e69c3f1a09e85c22'/>
         <Container component="main"maxWidth="xs">
          <CssBaseline />
           <Box

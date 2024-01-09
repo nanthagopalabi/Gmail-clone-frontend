@@ -39,7 +39,7 @@ export default function Forget() {
 return (
     <ThemeProvider theme={defaultTheme}>
       <Container className="imgRegister">
-      <img src='http://surl.li/nbdpx'/>
+      <img src='https://img.freepik.com/free-vector/reset-password-concept-illustration_114360-7886.jpg?w=740&t=st=1699686746~exp=1699687346~hmac=942b78b313f9cc790aac1755c788ad1630d52179bb9f9b4b9813479a67880386'/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
