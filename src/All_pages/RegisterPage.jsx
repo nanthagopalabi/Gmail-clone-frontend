@@ -91,7 +91,7 @@ const formik = useFormik({
             flexDirection: 'column',
             alignItems: 'center',
            }}>
-            <img className='imgGoogle'src='http://surl.li/dgqoq'/>
+            <img className='imgGoogle'src='https://web-screen.com/storage/screenshots/2024/01/7722152c-90a2-4692-90fc-764ce337d97e.png'/>
              <Typography component="h1" variant="h6">
                Create a Google Account
               </Typography>
